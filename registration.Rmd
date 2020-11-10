@@ -1,14 +1,14 @@
 ---
-title: "Computer-based feedback on writing quality"
+title: "Computer-based formative feedback on writing"
 author:
+- affiliation: University of Tübingen
+  email: salome.wagner@uni-tuebingen.de
+  name: Salome Wagner
+  url: https://uni-tuebingen.de/de/172926
 - affiliation: University of Tübingen
   email: juergen.schneider@uni-tuebingen.de
   name: Jürgen Schneider
   url: https://uni-tuebingen.de/de/175743
-- affiliation: University of Tübingen
-  email: ##
-  name: Salome Wagner
-  url: ##
 date: "`r Sys.Date()`"
 output:
   html_document:
@@ -78,7 +78,7 @@ _Standards have been partially adapted. Click 'show changes' to see changes and 
 
 ## Working Title
 
-<button data-toggle="collapse" data-target="#wt">show sources</button>
+<button data-toggle="collapse" data-target="#wt">more info</button>
 <div id="wt" class="collapse">
 
 ```{r}
@@ -106,12 +106,12 @@ knitr::kable(table_sources) %>%
 
 </div> 
 
-_Put your text here._
+Where to Next? Mapping the Landscape of Research on Computer-Based Feedback on Writing. A Systematic Review.
 
 
 ## Type of Review
 
-<button data-toggle="collapse" data-target="#typeor">show sources</button>
+<button data-toggle="collapse" data-target="#typeor">more info</button>
 <div id="typeor" class="collapse">
 
 ```{r}
@@ -144,13 +144,13 @@ knitr::kable(table_sources) %>%
 
 </div> 
 
-_Put your text here._
+Systematic review.
 
 
 
 ## Link to Registration
 
-<button data-toggle="collapse" data-target="#ltr">show sources</button>
+<button data-toggle="collapse" data-target="#ltr">more info</button>
 <div id="ltr" class="collapse">
 
 ```{r}
@@ -175,12 +175,12 @@ knitr::kable(table_sources) %>%
 
 </div> 
 
-_Put your text here._
+We use this form as registration.
 
 
 ## Anticipated start and completion date
 
-<button data-toggle="collapse" data-target="#aasd">show sources</button>
+<button data-toggle="collapse" data-target="#aasd">more info</button>
 <div id="aasd" class="collapse">
 
 ```{r}
@@ -205,13 +205,14 @@ knitr::kable(table_sources) %>%
 
 </div> 
 
-_Put your text here._
+__Start:__ July 2020  
+__Anticipated Completion Date:__ January 2021
 
 
 
 ## Stage of Review
 
-<button data-toggle="collapse" data-target="#sor">show sources</button>
+<button data-toggle="collapse" data-target="#sor">more info</button>
 <div id="sor" class="collapse">
 
 ```{r}
@@ -259,12 +260,21 @@ knitr::kable(table_sources, escape = F) %>%
 
 </div> 
 
-_Put your text here._
+The review has not yet started [yes/no]: no
+
+| Review stage | Started | Completed |
+|:--------------------------------------------| :----:| :----:|
+| Preliminary searches | Yes | No
+| Piloting of the study selection process | No | No
+| Formal screening of search results against eligibility criteria | No | No
+| Data extraction | No | No
+| Risk of bias (quality) assessment | No | No
+| Data analysis | No | No
 
 
 ## Names, Affiliations, Contact
 
-<button data-toggle="collapse" data-target="#nac">show sources</button>
+<button data-toggle="collapse" data-target="#nac">more info</button>
 <div id="nac" class="collapse">
 
 ```{r}
@@ -295,11 +305,17 @@ knitr::kable(table_sources) %>%
 
 </div> 
 
-_Put your text here._
+* Named contact: Salome Wagner
+* Named contact email: salome.wagner@uni-tuebingen.de
+* Named contact ORCID: [0000-0002-5839-7827](https://orcid.org/0000-0002-5839-7827)
+* Organisational affiliation of the review: University of Tübingen, Germany
+* Review team members and their organisational affiliations:
+  - Jürgen Schneider, juergen.schneider@uni-tuebingen.de, ORCID [0000-0002-3772-4198](https://orcid.org/0000-0002-3772-4198)
+  - Andreas Lachner, andreas.lachner@uni-tuebingen.de
 
 ## Collaborators
 
-<button data-toggle="collapse" data-target="#colla">show sources</button>
+<button data-toggle="collapse" data-target="#colla">more info</button>
 <div id="colla" class="collapse">
 
 ```{r}
@@ -323,12 +339,15 @@ knitr::kable(table_sources) %>%
 
 </div> 
 
-_Put your text here._
+* Name: pending
+* Email: pending
+* ORCID: pending
+* Affiliation: pending
 
 
 ## Amendments to previous versions
 
-<button data-toggle="collapse" data-target="#atpv">show sources</button>
+<button data-toggle="collapse" data-target="#atpv">more info</button>
 <div id="atpv" class="collapse">
 
 ```{r}
@@ -353,12 +372,12 @@ knitr::kable(table_sources) %>%
 
 </div> 
 
-_Put your text here._
+Amendments will be published as new version of the document under the same DOI (or will point to previous version).
 
 
 ## Funding sources, sponsors and their roles
 
-<button data-toggle="collapse" data-target="#fsign">show sources</button>
+<button data-toggle="collapse" data-target="#fsign">more info</button>
 <div id="fsign" class="collapse">
 
 ```{r}
@@ -388,12 +407,11 @@ knitr::kable(table_sources) %>%
 
 </div> 
 
-_Put your text here._
-
+No external funding.
 
 ## Conflict of Interest
 
-<button data-toggle="collapse" data-target="#coi">show sources</button>
+<button data-toggle="collapse" data-target="#coi">more info</button>
 <div id="coi" class="collapse">
 
 ```{r}
@@ -418,14 +436,14 @@ knitr::kable(table_sources) %>%
 
 </div> 
 
-_Put your text here._
+No conflict of interest.
 
 
 # Introduction
 
 ## Rationale
 
-<button data-toggle="collapse" data-target="#ram">show sources</button>
+<button data-toggle="collapse" data-target="#ram">more info</button>
 <div id="ram" class="collapse">
 
 ```{r}
@@ -460,24 +478,38 @@ knitr::kable(table_sources) %>%
 
 </div> 
 
-* Definition feedback [Jü]
-  - Fokus auf computer-based (nicht peer, nicht mediiert)
-  - Fokus auf feedback on writing
-  - Modell [evtl. nach unten?]
-* Aktueller Forschungsstand [Sa]
-  - AVs (Feedback auf was)
-  - wie Feedback?
-  - Tools
-  - Bedarf an Feedback (Relevanz) Petition against automated scoring systems: http://humanreaders.org/petition/research_findings.htm signatures still until 2020
-* Research gap: [Jü]
-  - Systematisierung der Forschung, Begriffe/ Konzepte und ...
-  - Practical Implications
-  - Need for Further Research 
+We define feedback as information on one's performance, provided by an external agent (e.g. teacher, program) regarding designated success criteria of the performance (Kluger & DeNisi, 1996). Feedback therefore necessarily follows performance (see fig. 1). When performance follows a task, success criteria can be explicitly (e.g. “I want you to write an essay with high cohesion on the topic … .”) or implicitly (e.g. “I want you to write a good essay on the topic … .”) addressed in the task.  
+  
+The goal of feedback is to help the recipient to reduce discrepancies between the actual performance and the targeted performance measured via the success criteria (Hattie & Timperley, 2007). Feedback therefore includes not only assessment (or evaluation) of the performance against the success criteria, but also cues on how to reduce the discrepancies (e.g. by knowledge about solutions; Winne & Butler, 1994; Stevenson & Phakiti, 2014).  
+  
+The use (or uptake, implementation) of feedback by the recipient depends on properties of the feedback (e.g. specifity) as well as personal traits of the recipient (e.g. effort invested; Patchan, Shunn & Correnti, 2016; Kluger & DeNisi, 1996). Feedback use can be mediated by an instructor who pedagogically scaffolds the presentation of the feedback or scaffold peers to give each other feedback. Both types of feedback - the instructor mediated and the peer-feedback - are not part of our investigations. Instead, we focus on computer-based feedback provided by a system. 
+  
 
+<iframe width="650" height="400" src="https://prezi.com/view/c09BOfUAMMgfvM4JmYuk/embed" webkitallowfullscreen="1" mozallowfullscreen="1" allowfullscreen="1"></iframe>  
+__Fig. 1:__ Proposed process of feedback
+
+\
+
+Software that takes the role of the feedback providing agent (computer-based feedback) usually utilize machine learning algorithms and combine several advantages:
+
+* they remove the knowledge barrier (e.g. knowledge on success criteria or diagnostic skills)
+* they give immediate feedback
+* the feedback (output) is consistent for the same input
+
+In our review we focus on computer-based systems that give feedback on writing, which are not without critique. Several studies have shown that they are not able to recognize crucial qualities of writing (Byrne, Tang, Truduc, & Tang, 2010) or use reductive measures for scoring complex skills (Perelman, 2012), just to name a few (see also: Petition against automated scoring systems: http://humanreaders.org/petition/research_findings.htm signatures still until 2020).
+
+
+In turn, there are also many studies that show a positive effect of computer-based feedback on learners’ writing products (e. g. with regard to a before/after revision or an effect of first-draft performance with a positive “transfer effect” on later writing; Lachner & Neuburg, 2018; Lachner, Burkhart, & Nückles, 2017). Most studies on computer-based feedback on writing, however, only explore the effects of a particular feedback-tool (Wilson & Czik, 2016;  Ranalli, Link, & Chukharev-Hudilainen, 2017) in terms of one or more aspects of feedback (e. g. overall text quality score, text comprehension or cohesion). Research syntheses on this topic are rarely available.  
+  
+Stevenson & Phakiti (2014) conducted a meta-analyses about the effects of computer-generated feedback on the quality of writing. They come to the conclusion the research on computer-based feedback on writing is very heterogeneous and the studies exist unconnected from each other. They state that it is necessary to investigate further whether “it is really the source of the feedback that matters, or whether it is other factors such as the way it is delivered, and the nature of the feedback provided that makes the difference” (p. 63). Hence it is unclear which __features of feedback__ are related with learning achievement and related constructs. In their current meta-analysis of the effects of feedback on student learning, Wisniewski, Zierer, & Hattie (2020) further emphasize this claim. What is more, Stevenson & Phakiti (2014) note that, so far, the analyses focused on the written production measures and that the effects of computer-based feedback on writing processes or perceived usefulness were not considered.  
+  
+Especially in times of home schooling (e.g. due to Covid 19) computer-based feedback is very relevant and can support teachers in their teaching and students in their individual learning processes (Shute, 2008; Wisniewski, Zierer, & Hattie, 2020). However, literature lacks of an overview of the current heterogeneous research, which shows 1) __what__ different feedback tools give feedback __on__ (Patchan, Schunn, & Correnti, 2016), 2) __how__ feedback is given using these tools (Hattie & Timperley, 2007) and 3) which tools are didactically developed to support students’ learning process. Therefore, we conduct a systematic review with the aims to show possible advancements in the last 17 years, to systematize the heterogeneous research landscape and to give practical implications.
+
+  
 
 ## Research Questions
 
-<button data-toggle="collapse" data-target="#rq">show sources</button>
+<button data-toggle="collapse" data-target="#rq">more info</button>
 <div id="rq" class="collapse">
 
 ```{r}
@@ -504,21 +536,14 @@ knitr::kable(table_sources) %>%
 ```
 
 </div> 
-
-[Sa]
-* Advancements of computer-based feedback in the last 10 years (sinde 2003?
-* mapping the landscape concerning
-  - what (Patchan, Schunn & Correnti)
-  - with smol additions of: focus of feedback (Hattie)
-* further directions
-
+We want to investigate 1) __what__ different feedback tools give feedback __on__ (Patchan, Schunn, & Correnti, 2016), 2) __how__ feedback is given using these tools (Hattie & Timperley, 2007) and 3) which tools are didactically developed to support students’ learning process. With this systematic review we want to explore possible advancements of the last 17 years, and we want to systematize the heterogeneous research landscape and to give practical implications to support computer-based teaching and learning.
 
 # Methods
 
 
-## Eligibility: Inclusion and Exclusion Criteria [Sa]
+## Eligibility: Inclusion and Exclusion Criteria 
 
-<button data-toggle="collapse" data-target="#eiaec">show sources</button>
+<button data-toggle="collapse" data-target="#eiaec">more info</button>
 <div id="eiaec" class="collapse">
 
 ```{r}
@@ -558,9 +583,9 @@ __PICOS__
 * Population: 
   - formal learning context (planned as a learning activity to improve writing skills)
   - L1 (first language)
-  - years: 2003 and younger: MYaccess established (uses intellimetric), Project Essay Grade updated, summary street?, e-rater?
+  - years: 2003 and younger (rationale see 'Search Strategy')
 * Intervention: 
-  - system generated feedback
+  - system/ computer generated feedback
   - formative feedback
   - immediate feedback
   - targeted at improving writing
@@ -573,6 +598,7 @@ __PICOS__
   - sentence structure (variety of sentences)
   - overall development (awareness of purpose, task, and audience)
   - (different!) overall quality scores
+  - specifity (Problems, solutions, locatization)
 * Study Type
   - empirical (quantitative and qualitative)
 
@@ -582,22 +608,25 @@ __PICOS__
 
 * Population: 
   - no formal learning context (e.g. novel writing; diary writing)
+  - not in the context of writing
   - L2 learning (second language learning)
 * Intervention: 
   - peer feedback
   - summative feedback
   - delayed feedback
-  - teacher feedback using computer tools
+  - teacher feedback using computer tools (mediated feedback)
   - targeted at improving content learning
 * Comparison/ Control:
   - not empirical
 * Outcome: 
   - does not focus text quality
   - conceptual content knowledge
+* Study Type
+  - purely conceptual
 
-## Sources of Search: List and Rationale [Jü]
+## Sources of Search: List and Rationale
 
-<button data-toggle="collapse" data-target="#soslar">show sources</button>
+<button data-toggle="collapse" data-target="#soslar">more info</button>
 <div id="soslar" class="collapse">
 
 ```{r}
@@ -633,14 +662,7 @@ knitr::kable(table_sources) %>%
 </div> 
 
 * specific target journals (check if indexed anyway) with search term
-  - assessing writing
-  - language testing
-  - journal of writing research
-  - reading and writing
-  - Computers & Education
-  - Computers and Human Behavior
-  - Computer Assisted Learning
-  - "diese computer journals"
+  - all target journals are indexed in one of the data bases (ERIC, PsycINFO or Web of Science)
 * data bases:
   - ERIC
   - PsycINFO
@@ -648,15 +670,13 @@ knitr::kable(table_sources) %>%
   - first 100 results from google scholar
 * backwards search from articles:
   - After screening abstracts and titles: We use the three latest synthesis articles (reviews or metaanalyses) and screen their references
-* forward search from articles:
-  - ??? without prereg?
 * preprint server
   - PsychArchives
   - PsyArXiv & SocArXiv
 
 ## Search Strategy
 
-<button data-toggle="collapse" data-target="#searchs">show sources</button>
+<button data-toggle="collapse" data-target="#searchs">more info</button>
 <div id="searchs" class="collapse">
 
 ```{r}
@@ -681,13 +701,29 @@ knitr::kable(table_sources) %>%
 
 </div> 
 
-_Put your text here._
+__Search String: PICO__  
+
+* Participants: `NOT (peer  OR medic*  OR neural-network  OR health*  OR care*)`
+* Intervention: `((computer*  OR automat*)  AND (writ*  AND (argument*  OR essay*  OR summary  OR exposit*  OR expla*))  AND (feedback  OR evaluat*  OR assess*  OR scor*)`
+* Control: _none_
+* Outcome: _none_
+
+__Timespan:__  
+2003 - 2020  
+Around 2003 several programs were either established of got a major upgrade (see below). Before this timeframe, programs were rarely powered by machine learning (or related) algorythms. They had less or different range of functions and were thus different programs. We therefore choose this timeframe to make make analyses more comparable and reduce bias. 
+
+Examples:
+
+* MyAccess: established in 2003
+* Project Essay Grade: Bought by Measurement, Inc. in 2002/2003 and subsequently utilized AI scoring engine
+* Citerion: major upgrade of scoring engine from e-rater V1.3 to e-rater V2.0 in 2004 (Attali & Burstein, 2004)
+* Summary Street: established between 2002 and 2004 (Wade-Stein & Kintsch, 2004)
 
 
 
 ## Data Management Tools Used
 
-<button data-toggle="collapse" data-target="#dmtu">show sources</button>
+<button data-toggle="collapse" data-target="#dmtu">more info</button>
 <div id="dmtu" class="collapse">
 
 ```{r}
@@ -712,13 +748,13 @@ knitr::kable(table_sources) %>%
 
 </div> 
 
-_Put your text here._
+- Mendeley (Reference Management) to collect and sort out the search results from the data bases
+- Rayyan (https://rayyan.qcri.org/welcome) to include or exclude articles by several raters
 
 
+## Selection of Studies
 
-## Data Extraction (Selection of Studies)
-
-<button data-toggle="collapse" data-target="#desos">show sources</button>
+<button data-toggle="collapse" data-target="#desos">more info</button>
 <div id="desos" class="collapse">
 
 ```{r}
@@ -746,12 +782,22 @@ knitr::kable(table_sources) %>%
 
 </div> 
 
-_Put your text here._
+Two independent reviewers conduct every of the following steps:
+
+Process of revison:
+
+  1) screening titles and if we cannot make a statement based on the title we will screen the abstract
+  2) screening all abstracts
+  3) screening full texts
+
+At each of this three steps articles will be selected for inclusion if the inclusion criteria apply and none of the exclusivity criteria apply. If this is not the case articles will be excluded. 
+If it is not clearly wheter articles should be included or excluded these studies will be marked as "maybe" and will be discussed with both reviewer together at the end. 
+Articles will also be discussed together of both of the reviewers if there were disagreements. This disagreements were resolved by screening the full texts using the inclusion criteria.
 
 
 ## Method of Extracting Data & Information (from Reports)
 
-<button data-toggle="collapse" data-target="#edfr">show sources</button>
+<button data-toggle="collapse" data-target="#edfr">more info</button>
 <div id="edfr" class="collapse">
 
 ```{r}
@@ -779,13 +825,15 @@ knitr::kable(table_sources) %>%
 
 </div> 
 
-_Put your text here._
+* Studies will be coded in Rayyan as far as possible.
+* Beyond that: Both reviewers either use a standardized Excel form or a self-programmed dashboard that produces a relational database.
+* After data input both reviewers check for consistency and discuss discrepancies.
 
 
 
 ## List and Description of Data and Information Extracted
 
-<button data-toggle="collapse" data-target="#ladodaie">show sources</button>
+<button data-toggle="collapse" data-target="#ladodaie">more info</button>
 <div id="ladodaie" class="collapse">
 
 ```{r}
@@ -819,12 +867,26 @@ knitr::kable(table_sources) %>%
 
 </div> 
 
-_Put your text here._
+* publication status [scholarly published, grey literature]
+* visual presentation of feedback [grafical, text, mixed]
+* specifity [problem, solution, localization]
+* summarization
+* explanation
+* scope
+* content focus (success criteria) of feedback [lower order, higher order]
+* tool/software used
+* quantitative empirical studies
+  - sample size
+  - geographic location
+  - condition characteristics
+  - measured construct
+  - effect size
+  
 
 
 ## Effect size transformation from individual studies
 
-<button data-toggle="collapse" data-target="#estfis">show sources</button>
+<button data-toggle="collapse" data-target="#estfis">more info</button>
 <div id="estfis" class="collapse">
 
 ```{r}
@@ -850,12 +912,12 @@ knitr::kable(table_sources) %>%
 
 </div> 
 
-_Put your text here._
+It is unlikely that meta-anylsis will be possible due to lack of quantitative empirical studies that fulfill our quality standards. If meta-analysis is possible we will convert effect sizes based on Polanin & Snilstveit (https://doi.org/10.4073/cmpn.2016.3).
 
 
 ## Risk of Bias in Individual Studies
 
-<button data-toggle="collapse" data-target="#robiis">show sources</button>
+<button data-toggle="collapse" data-target="#robiis">more info</button>
 <div id="robiis" class="collapse">
 
 ```{r}
@@ -883,7 +945,7 @@ knitr::kable(table_sources) %>%
 
 </div> 
 
-_Put your text here._
+We will use a subset of the items/ dimensions from study DIAD (Valentine & Cooper, 2008).
 
 
 # Results
@@ -891,7 +953,7 @@ _Put your text here._
 
 ## Strategy for Data Sythesis
 
-<button data-toggle="collapse" data-target="#sfds">show sources</button>
+<button data-toggle="collapse" data-target="#sfds">more info</button>
 <div id="sfds" class="collapse">
 
 ```{r}
@@ -928,12 +990,16 @@ knitr::kable(table_sources) %>%
 
 </div> 
 
-_Put your text here._
+It is unlikely that meta-analysis will be possible.  
+   
+The aim of the review is to map the scientific literature concerning computer-based feedback on writing, to describe which tools are available, what type and the content of feedback they give and the amout of research volume available.  
+  
+As the review includes qualitative as well as quantitative studies, strategies of narrative summarizing will be applied. 
 
 
 ## Moderators/ Subgroups
 
-<button data-toggle="collapse" data-target="#modarat">show sources</button>
+<button data-toggle="collapse" data-target="#modarat">more info</button>
 <div id="modarat" class="collapse">
 
 ```{r}
@@ -958,13 +1024,30 @@ knitr::kable(table_sources) %>%
 
 </div> 
 
-_Put your text here._
+__main categorization__  
+
+* visual presentation of feedback [grafical, text, mixed]
+* specifity [problem, solution, localization]
+* summarization
+* explanation
+* scope
+* content focus (success criteria) of feedback [lower order, higher order]
+* tool/software used
+
+__categorization for further description__  
+
+* Side of Recipients:
+  - prerequisite of the sample/ target group (gender, age, grade, experience, motivation, writing ability, self concept)
+  - process (cognitive load, understanding, editing time, text length)
+  - implementation/ use of feedback
+* Side of the Agent
+  - intention of use
 
 
 
 ## Assessment of Publication Bias
 
-<button data-toggle="collapse" data-target="#aopb">show sources</button>
+<button data-toggle="collapse" data-target="#aopb">more info</button>
 <div id="aopb" class="collapse">
 
 ```{r}
@@ -995,15 +1078,16 @@ knitr::kable(table_sources) %>%
 
 </div> 
 
-_Put your text here._
+Grey literature will be included (see sources of search).  
+As there will be likely no meta-analysis, we will not be able to assess publication bias quantitatively.
 
 
 # Discussion
 
 
-## Strength of Evidence
+## Strength of Cumulative Evidence
 
-<button data-toggle="collapse" data-target="#stroe">show sources</button>
+<button data-toggle="collapse" data-target="#stroe">more info</button>
 <div id="stroe" class="collapse">
 
 ```{r}
@@ -1028,4 +1112,5 @@ knitr::kable(table_sources) %>%
 
 </div> 
 
-_Put your text here._
+Evidence is a concept from quantitative empirical research, however, our review also includes qualitative studies.  
+If we include a meta-analysis in the review (see above), we will be evaluating the strength of evidence based on dimensions that apply to our review from the GRADE (Grading of Recommendations Assessment, Development and Evaluation) approach.
