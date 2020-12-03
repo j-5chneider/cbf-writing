@@ -38,6 +38,15 @@ knitr::opts_chunk$set(echo = FALSE)
 * Hussein MA, Hassan H, Nassef M. 2019. Automated language essay scoring systems: a literature review. PeerJ Computer Science 5:e208 https://doi.org/10.7717/peerj-cs.208
 
 
+## Screening
+
+Backward search (3 latest research syntheses):
+
+* https://doi.org/10.1016/j.compedu.2018.12.005
+* https://files.eric.ed.gov/fulltext/ED586512.pdf (https://eric.ed.gov/?id=ED586512)
+* http://dx.doi.org/10.1016/j.asw.2013.11.007
+
+
 # Submission
 
 * Educational Research Review https://www.journals.elsevier.com/educational-research-review
