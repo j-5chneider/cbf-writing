@@ -29,3 +29,5 @@ table(art_csv$decision_s)
 
 # write table with clean data set to data folder
 write_csv(art_csv, file = "data/articles_clean.csv")
+library(openxlsx)
+write.xlsx(art_csv, file = "data/articles_clean.xlsx")
