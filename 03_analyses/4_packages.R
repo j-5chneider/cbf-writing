@@ -1,0 +1,8 @@
+install.packages("haven")
+library(haven)
+library(Matrix)
+library(metafor)
+library(tidyverse)
+library(haven)
+library(psych)
+library(riot)
