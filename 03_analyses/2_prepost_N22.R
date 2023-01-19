@@ -1,6 +1,13 @@
-data <- read_sav("C:/Users/Salome Wagner/OneDrive - UT Cloud/Metaanalyse/Analyse und results/Metaanalysis_prepost_N22.sav")
+library(tidyverse)
+library(here)
+library(haven)
+library(metafor)
 
-####Schlaufe
+data <- read_sav(here("02_data/03_SPSS files/Metaanalysis_prepost_N22.sav"))
+
+#### LOOP BEGIN ################################################################
+
+# Establish empty data frame to be filled with results
 data_pp <- data.frame(
   id = c(1,1,1,2,3,3,4,4,5,5,6,6,6,7,8,9,10,11,11,11, 12,13),
   m_pre = data$M_pre,
@@ -127,7 +134,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
             vb = rma_overall_clustered$vb[1,1]
     )
 }
-## Schlaufe ENDE ####################################################################################
+## LOOP END ####################################################################
 
 ## FOREST PLOT with means of all meta-analyses from sensitivity analysis
 # summarize results from all meta-analyses
@@ -146,10 +153,10 @@ rma_overall_clustered
 ##result: g = .5530, p = .0055, CI 95% [0.1609, 0.9348] sign., sehr mittlerer Effekt
 #Heterogeneity: Q(df = 21) = 281.2100, p < .0001
 
-summary(sensitivity) #mittlere Effektstärke bei beta ablesen: g = .55 (ranging from .55 to .56), p = .005 (ranging from .004 to .006)
+summary(sensitivity) #mittlere Effektst?rke bei beta ablesen: g = .55 (ranging from .55 to .56), p = .005 (ranging from .004 to .006)
 
 ## forest plot
-forest(rma_overall_clustered) #zeigt in diesem Fall die Werte für die letzte Korrelation an
+forest(rma_overall_clustered) #zeigt in diesem Fall die Werte f?r die letzte Korrelation an
 
 ####PUBLICATION BIAS
 ##Funnel plot
@@ -175,7 +182,7 @@ P<- W-W%*% X %*% solve(t(X) %*% W %*% X) %*% t(X) %*% W
 100*sum(rma_overall_clustered$sigma2)/(sum(rma_overall_clustered$sigma2)+ (rma_overall_clustered$k-rma_overall_clustered$p)/sum(diag(P)))
 
 100*rma_overall_clustered$sigma2/(sum(rma_overall_clustered$sigma2)+(rma_overall_clustered$k - rma_overall_clustered$p)/sum(diag(P)))
-#I² = 98.23% of the detected variation could be related to  true variation among studies
+#I? = 98.23% of the detected variation could be related to  true variation among studies
 
 
 ####MODERATION ANALYSES

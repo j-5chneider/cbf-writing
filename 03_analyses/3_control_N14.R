@@ -2,11 +2,12 @@ library(Matrix)
 library(metafor)
 library(tidyverse)
 library(haven)
+library(here)
 library(psych)
 
-my_data <- read_sav("C:/Users/Salome Wagner/OneDrive - UT Cloud/Metaanalyse/Analyse und results/Metaanalysis_control_N14.sav")
-my_data
-## Schlaufe ########################################################################################
+my_data <- read_sav(here("02_data/03_SPSS files/Metaanalysis_control_N14.sav"))
+ my_data
+## Schlaufe ####################################################################
 datT <- data.frame(
   id = c(1,1,1,2,3,3,4,4,5,6,7,8,8,8),
   m_pre = my_data$M_Feedback,
@@ -124,7 +125,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
             vb = rma_overall_clustered$vb[1,1]
     )
 }
-## Schlaufe ENDE ####################################################################################
+## Schlaufe ENDE ###############################################################
 
 ##summarize results from all meta-analyses 
 sensitivity_forest <- sensitivity %>%
@@ -140,12 +141,12 @@ rma_overall_clustered$vb[1,1]    <- as.numeric(sensitivity_forest[1, 30])
 
 rma_overall_clustered
 ##result: g = .25, p = .054, CI 95% [-0.0037, 0.4715] nicht sign.
-#Heterogeneity: Q(df = 13) = 75.0329, p < .0001, I² = 75%
+#Heterogeneity: Q(df = 13) = 75.0329, p < .0001, I? = 75%
 
-summary(sensitivity) #mittlere Effektstärke bei beta ablesen: g = .25 (ranging from .23 to .26), p = .041 (ranging from .033 to .054)
+summary(sensitivity) #mittlere Effektst?rke bei beta ablesen: g = .25 (ranging from .23 to .26), p = .041 (ranging from .033 to .054)
 
 ## forest plot
-forest(rma_overall_clustered) #zeigt in diesem Fall die Werte für die letzte Korrelation an
+forest(rma_overall_clustered) #zeigt in diesem Fall die Werte f?r die letzte Korrelation an
 
 ####PUBLICATION BIAS
 ##Funnel plot
@@ -171,7 +172,7 @@ P<- W-W%*% X %*% solve(t(X) %*% W %*% X) %*% t(X) %*% W
 100*sum(rma_overall_clustered$sigma2)/(sum(rma_overall_clustered$sigma2)+ (rma_overall_clustered$k-rma_overall_clustered$p)/sum(diag(P)))
 
 100*rma_overall_clustered$sigma2/(sum(rma_overall_clustered$sigma2)+(rma_overall_clustered$k - rma_overall_clustered$p)/sum(diag(P)))
-#I² = 75.23% of the detected variation could be related to  true variation among studies
+#I? = 75.23% of the detected variation could be related to  true variation among studies
 
 
 ####MODERATION ANALYSES
