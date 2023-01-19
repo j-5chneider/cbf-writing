@@ -1,6 +1,7 @@
 library(tidyverse)
+library(here)
 
-art_csv <- rio::import(file="data/articles.csv")
+art_csv <- rio::import(file=here("02_data/01_rayaan output/articles.csv"))
 
 art_csv <- art_csv %>%
   dplyr::mutate(excl_reason = str_extract(.$notes, "RAYYAN-EXCLUSION-REASONS:.*?(\\||$)"), # extract exclusion reasons
