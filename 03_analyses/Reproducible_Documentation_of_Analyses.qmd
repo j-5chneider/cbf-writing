@@ -247,7 +247,9 @@ sensitivity %>%
 
 **We summarize these results:**
 
-* ES: meta-analytic ES
+* ES_mean: meta-analytic ES (mean over the 26 meta-analyses)
+* ES_min: meta-analytic ES (min of the 26 meta-analyses)
+* ES_max: meta-analytic ES (max of the 26 meta-analyses)
 * CI_lower_mean: lower CI of meta-analytic ES (mean over the 26 meta-analyses)
 * CI_lower_min: lower CI of meta-analytic ES (min of the 26 meta-analyses)
 * CI_lower_max: lower CI of meta-analytic ES (max of the 26 meta-analyses)
@@ -910,7 +912,9 @@ sensitivity %>%
 
 **We summarize these results:**
 
-* ES: meta-analytic ES
+* ES_mean: meta-analytic ES (mean over the 26 meta-analyses)
+* ES_min: meta-analytic ES (min of the 26 meta-analyses)
+* ES_max: meta-analytic ES (max of the 26 meta-analyses)
 * CI_lower_mean: lower CI of meta-analytic ES (mean over the 26 meta-analyses)
 * CI_lower_min: lower CI of meta-analytic ES (min of the 26 meta-analyses)
 * CI_lower_max: lower CI of meta-analytic ES (max of the 26 meta-analyses)
