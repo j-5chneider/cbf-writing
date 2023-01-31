@@ -390,11 +390,49 @@ regtest(rma_trimfill)
 Calculating $I^2$
 
 ```{r}
+#| skimr_digits = 3
+
 ###HETEROGENEITY
-W<-diag(1/REM$vi)
-X<-model.matrix(REM)
-P<- W-W%*% X %*% solve(t(X) %*% W %*% X) %*% t(X) %*% W
-100*REM$sigma2/(sum(REM$sigma2)+(REM$k - REM$p)/sum(diag(P)))
+
+# Establish empty data frame to be filled with results
+heterogeneity_sen <- data.frame(ri_t = as.numeric(),   # assumed pre-post correlation
+                                I2 = as.numeric())     # I²
+
+# starting loop over 26 possible pre-post-correlations
+for (ri_t in seq(from = .50, to=.75, by=.01)) {
+  ###compute effect sizes for writing quality
+  # effect sizes from within-subjects data
+  data_pp_es <- escalc(measure = "SMCR",
+                       m1i=data_pp$m_post, m2i=data_pp$m_pre,
+                       sd1i=data_pp$sd_pre, sd2i=data_pp$sd_post,
+                       ni=data_pp$ni, ri=rep(ri_t, 22),
+                       slab = data_pp$slab)
+  # append the id variable
+  data_pp_es$id <- data_pp$id
+  
+  # compute the meta-analysis
+  REM <- rma.mv(yi, vi, 
+                data=data_pp_es, 
+                random = ~ 1 | id # take clustered data into account
+                )
+  
+  # Formula
+  W <- diag(1/REM$vi)
+  X <- model.matrix(REM)
+  P <- W-W%*% X %*% solve(t(X) %*% W %*% X) %*% t(X) %*% W
+  I2 <- 100*REM$sigma2/(sum(REM$sigma2)+(REM$k - REM$p)/sum(diag(P)))
+  
+  # save estimates for sensitivity analysis
+  heterogeneity_sen <- heterogeneity_sen %>%
+    add_row(ri_t = ri_t, 
+            I2 = I2)
+}
+
+heterogeneity_sen %>%
+  kbl() %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+skim(heterogeneity_sen)
 ```
 
 ## Moderators
@@ -414,6 +452,8 @@ For each moderator we provide
 ### Representation
 
 ```{r}
+#| skimr_digits = 3
+
 ## REPRESENTATION #######################
 sensitivity_moderator <- data.frame(
     ri_t = as.numeric(),
@@ -458,6 +498,8 @@ skim(sensitivity_moderator)
 ### Order
 
 ```{r}
+#| skimr_digits = 3
+
 ## ORDER ############################
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
@@ -502,6 +544,8 @@ skim(sensitivity_moderator)
 ### Order low
 
 ```{r}
+#| skimr_digits = 3
+
 ## ORDER LOW ############################
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
@@ -546,6 +590,8 @@ skim(sensitivity_moderator)
 ### Order high
 
 ```{r}
+#| skimr_digits = 3
+
 ## ORDER HIGH ############################
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
@@ -590,6 +636,8 @@ skim(sensitivity_moderator)
 ### Order high-low
 
 ```{r}
+#| skimr_digits = 3
+
 ## ORDER HIGH-LOW ############################
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
@@ -634,6 +682,8 @@ skim(sensitivity_moderator)
 ### Specifity
 
 ```{r}
+#| skimr_digits = 3
+
 ## SPECIFITY ############################
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
@@ -678,6 +728,8 @@ skim(sensitivity_moderator)
 ### Tool numbers
 
 ```{r}
+#| skimr_digits = 3
+
 ## TOOL NUMBERS ############################
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
@@ -722,6 +774,8 @@ skim(sensitivity_moderator)
 ### Prior knowledge
 
 ```{r}
+#| skimr_digits = 3
+
 ## PRIOR KNOWLEDGE ############################
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
@@ -894,14 +948,15 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
 
 **Results from all 26 meta-analyses:**
 
-* ri_t: assumed pre-post-correlation
+* ri_t: assumed pre-post-correlation (treatment group)
+* ri_c: assumed pre-post-correlation (control group)
 * beta: meta-analytic ES
 * se: SE of meta-analytic ES
 * pvalue: p value of meta-analytic ES
 
 ```{r}
 sensitivity %>%
-  dplyr::select(ri_t, beta, se, pvalue) %>%
+  dplyr::select(ri_t, ri_c, beta, se, pvalue) %>%
   kbl() %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
 ```
@@ -928,7 +983,7 @@ sensitivity %>%
 ```{r}
 # compute mean, min and max of ES, CI and pvalue from meta-analysis
 sensitivity %>%
-  dplyr::summarise(ES_mean         = mean(beta),
+  dplyr::summarise(ES_mean = mean(beta),
                    ES_min  = min(beta),
                    ES_max  = max(beta),
                    CI_lower_mean        = mean(beta-(1.96*se)),
@@ -983,7 +1038,7 @@ sensitivity %>%
                    CI_upper_mean = mean(yi+(1.96*sei)),
                    CI_upper_min  = min(yi+(1.96*sei)),
                    CI_upper_max  = max(yi+(1.96*sei)))  %>%
-  right_join(data_pp[c("sampleNr", "slab")],., by = "sampleNr") %>%
+  right_join(datT[c("sampleNr", "slab")],., by = "sampleNr") %>%
   dplyr::select(-sampleNr) %>%
   kbl() %>%
   kable_styling(bootstrap_options = c("striped", "hover")) %>%
@@ -1064,11 +1119,60 @@ regtest(rma_trimfill)
 Calculating $I^2$
 
 ```{r}
+#| skimr_digits = 3
+
 ###HETEROGENEITY
-W<-diag(1/REM$vi)
-X<-model.matrix(REM)
-P<- W-W%*% X %*% solve(t(X) %*% W %*% X) %*% t(X) %*% W
-100*REM$sigma2/(sum(REM$sigma2)+(REM$k - REM$p)/sum(diag(P)))
+
+# Establish empty data frame to be filled with results
+heterogeneity_sen <- data.frame(ri_t = as.numeric(),   # assumed pre-post correlation (treatment group)
+                                ri_c = as.numeric(),   # assumed pre-post correlation (control group)
+                                I2 = as.numeric())     # I²
+
+# starting loop over 26 possible pre-post-correlations
+for (ri_t in seq(from = .50, to=.75, by=.01)) {
+  ###compute effect sizes for writing quality
+  # effect sizes from between-subjects data
+  datT_es<- escalc(measure = "SMCR",
+                   m1i=datT$m_post, m2i=datT$m_pre,
+                   sd1i=datT$sd_pre, sd2i=datT$sd_post,
+                   ni=datT$ni, ri=rep(ri_t, 14),
+                   slab = datT$slab)
+  
+  datT_es$id <- datT$id
+  
+  datC_es <- escalc(measure="SMCR",
+                    m1i=datC$m_post, m2i=datC$m_pre,
+                    sd1i=datC$sd_pre, sd2i=datC$sd_post,
+                    ni=datC$ni, ri=rep((ri_t+.14), 14),
+                    slab = datC$slab)
+  datC_es$id<-datC$id
+  
+  dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
+  
+  dat$id <- c(1,1,1,2,3,3,4,4,5,6,7,8,8,8)
+  REM <- rma.mv(yi, vi, 
+                data=dat, 
+                random = ~ 1 | id # take clustered data into account
+                )
+  
+  # Formula
+  W <- diag(1/REM$vi)
+  X <- model.matrix(REM)
+  P <- W-W%*% X %*% solve(t(X) %*% W %*% X) %*% t(X) %*% W
+  I2 <- 100*REM$sigma2/(sum(REM$sigma2)+(REM$k - REM$p)/sum(diag(P)))
+  
+  # save estimates for sensitivity analysis
+  heterogeneity_sen <- heterogeneity_sen %>%
+    add_row(ri_t = ri_t, 
+            ri_c = ri_t+.14,
+            I2 = I2)
+}
+
+heterogeneity_sen %>%
+  kbl() %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+skim(heterogeneity_sen)
 ```
 
 ## Moderators
@@ -1088,6 +1192,8 @@ For each moderator we provide
 ### Representation
 
 ```{r}
+#| skimr_digits = 3
+
 ## REPRESENTATION #######################
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
@@ -1143,6 +1249,8 @@ skim(sensitivity_moderator)
 ### Order
 
 ```{r}
+#| skimr_digits = 3
+
 ## ORDER ############################
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
@@ -1198,6 +1306,8 @@ skim(sensitivity_moderator)
 ### Order low
 
 ```{r}
+#| skimr_digits = 3
+
 ## ORDER LOW ############################
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
@@ -1253,6 +1363,8 @@ skim(sensitivity_moderator)
 ### Order high
 
 ```{r}
+#| skimr_digits = 3
+
 ## ORDER HIGH ############################
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
@@ -1308,6 +1420,8 @@ skim(sensitivity_moderator)
 ### Order high-low
 
 ```{r}
+#| skimr_digits = 3
+
 ## ORDER HIGH-LOW ############################
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
@@ -1363,6 +1477,8 @@ skim(sensitivity_moderator)
 ### Specifity
 
 ```{r}
+#| skimr_digits = 3
+
 ## SPECIFITY ############################
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
@@ -1418,6 +1534,8 @@ skim(sensitivity_moderator)
 ### Tool numbers
 
 ```{r}
+#| skimr_digits = 3
+
 ## TOOL NUMBERS ############################
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
@@ -1473,6 +1591,8 @@ skim(sensitivity_moderator)
 ### Prior knowledge
 
 ```{r}
+#| skimr_digits = 3
+
 ## PRIOR KNOWLEDGE ############################
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
@@ -1528,6 +1648,8 @@ skim(sensitivity_moderator)
 ### Expert
 
 ```{r}
+#| skimr_digits = 3
+
 ## EXPERT  ######################################
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
