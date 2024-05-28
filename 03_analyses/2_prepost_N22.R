@@ -1,6 +1,6 @@
-data <- read_sav("C:/Users/Salome Wagner/OneDrive - UT Cloud/Metaanalyse/Analyse und results/Metaanalysis_prepost_N22.sav")
+data <- read_sav("C://Users//Salome Wagner//OneDrive - UT Cloud//Metaanalyse//cbf-writing//02_data//03_SPSS files//Metaanalysis_prepost_N22.sav")
 
-####Schlaufe
+####loop
 data_pp <- data.frame(
   id = c(1,1,1,2,3,3,4,4,5,5,6,6,6,7,8,9,10,11,11,11, 12,13),
   m_pre = data$M_pre,
@@ -14,7 +14,7 @@ data_pp
 sensitivity <- data.frame(ri_t = as.numeric(),
                           intrcpt = as.numeric(),
                           pvalue = as.numeric(),
-                          yi.f01 = as.numeric(),  # ES der einzelnen Studien
+                          yi.f01 = as.numeric(),  # ES of the single studies
                           yi.f02 = as.numeric(),
                           yi.f03 = as.numeric(),
                           yi.f04 = as.numeric(),
@@ -36,7 +36,7 @@ sensitivity <- data.frame(ri_t = as.numeric(),
                           yi.f20 = as.numeric(),
                           yi.f21 = as.numeric(),
                           yi.f22 = as.numeric(),
-                          vi.f01 = as.numeric(),  # SEs der ES der einzelnen Studien
+                          vi.f01 = as.numeric(),  # SEs of ES of the single studies
                           vi.f02 = as.numeric(),
                           vi.f03 = as.numeric(),
                           vi.f04 = as.numeric(),
@@ -58,8 +58,8 @@ sensitivity <- data.frame(ri_t = as.numeric(),
                           vi.f20 = as.numeric(),
                           vi.f21 = as.numeric(),
                           vi.f22 = as.numeric(),
-                          beta = as.numeric(),  # meta-analytische ES
-                          vb = as.numeric()    # SE meta-alyritsche ES
+                          beta = as.numeric(),  # meta-analytic ES
+                          vb = as.numeric()    # SE of meta-analytic ES
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -127,7 +127,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
             vb = rma_overall_clustered$vb[1,1]
     )
 }
-## Schlaufe ENDE ####################################################################################
+## loop end ####################################################################################
 
 ## FOREST PLOT with means of all meta-analyses from sensitivity analysis
 # summarize results from all meta-analyses
@@ -143,13 +143,38 @@ rma_overall_clustered$beta[,1]   <- as.numeric(sensitivity_forest[1, 45])
 rma_overall_clustered$vb[1,1]    <- as.numeric(sensitivity_forest[1, 46])
 
 rma_overall_clustered
-##result: g = .5530, p = .0055, CI 95% [0.1609, 0.9348] sign., sehr mittlerer Effekt
-#Heterogeneity: Q(df = 21) = 281.2100, p < .0001
+##result: g = .5442, p = .0067, CI 95% [0.1501, 0.9308] sign., medium effect
+#Heterogeneity: Q(df = 21) = 276.4974, p < .0001
 
-summary(sensitivity) #mittlere Effektstärke bei beta ablesen: g = .55 (ranging from .55 to .56), p = .005 (ranging from .004 to .006)
+summary(sensitivity) #read mean ES from beta: .5445 (ranging from .54 to .55), p = .006 (ranging from .006 to .007), mean cor: r = .625 (ranging from .5 to .75)
 
 ## forest plot
-forest(rma_overall_clustered) #zeigt in diesem Fall die Werte für die letzte Korrelation an
+forest(rma_overall_clustered) #shows in this case the values with the last correlation
+
+
+#########CLUSTERING
+###is nesting within studies necessary?
+#without cluster
+full.model <- rma.mv(yi = yi,
+                     V = vi,
+                     slab = id,
+                     data = data_pp_es,
+                     test = "t",
+                     method = "REML")
+
+#with cluster
+model.removed <- rma.mv(yi = yi,
+                        V = vi,
+                        slab = id,
+                        data = data_pp_es,
+                        random = ~ 1 | id,
+                        test = "t",
+                        method = "REML")
+
+#comparison of both models
+anova(full.model, model.removed) #sign. p-value. removed-model is preferred over the full model that indicated that there are substantial differences between papers (id).
+
+
 
 ####PUBLICATION BIAS
 ##Funnel plot
@@ -175,7 +200,7 @@ P<- W-W%*% X %*% solve(t(X) %*% W %*% X) %*% t(X) %*% W
 100*sum(rma_overall_clustered$sigma2)/(sum(rma_overall_clustered$sigma2)+ (rma_overall_clustered$k-rma_overall_clustered$p)/sum(diag(P)))
 
 100*rma_overall_clustered$sigma2/(sum(rma_overall_clustered$sigma2)+(rma_overall_clustered$k - rma_overall_clustered$p)/sum(diag(P)))
-#I² = 98.23% of the detected variation could be related to  true variation among studies
+#I? = 98.23% of the detected variation could be related to  true variation among studies
 
 
 ####MODERATION ANALYSES
@@ -190,26 +215,27 @@ data_pp_es$WQP_pre <- as.factor(data$WQP_pre)
 
 
 rep<-rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = rep)
-rep #nicht sign. g = .0087, p = .6229
+rep #not sign. g = .0087, p = .6229
 order<-rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = order)
-order #nicht sign. g = .0440, p = .8830
+order #not sign. g = .0440, p = .8830
 low_order<-rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = order_low)
-low_order #nicht sign. g = -.3035, p = .5903
+low_order #not sign. g = -.3035, p = .5903
 hi_order<-rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = order_hi)
-hi_order #nicht sign. g = .2413, p = .5538
+hi_order #not sign. g = .2413, p = .5538
 hilow_order<-rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = order_hilow)
-hilow_order #nicht sign. g = -.0822, p = .8479
+hilow_order #not sign. g = -.0822, p = .8479
 spec<-rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = spec)
 spec #sign. g = .4258, p = .0428
 tool<-rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = tool)
-tool #nicht sign. g = .0471, p = .6947
+tool #not sign. g = .0471, p = .6947
 vorwissen<-rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = WQP_pre)
-vorwissen #nicht sign. g = .0430, p = .0948
+vorwissen #not sign. g = .0430, p = .0948
 #prior knowledge: expert level
-data_pp$Expert <- c(1, 1, 1, 2, 1, 1, 2, 2, 1,2,1,1,1,1,1,1,2,1,2,2, 1, 1) #WQP_FB_pre: 1 = unter 60% (niedriges Vorwissen, 2 = ueber 60% (hohes Vorwissen))
+data_pp$Expert <- c(1, 1, 1, 2, 1, 1, 2, 2, 1,2,1,1,1,1,1,1,2,1,2,2, 1, 1) #WQP_FB_pre: 1 = under 60% (lower prior knowledge, 2 = over 60% (higher prior knowledge))
 data_pp_es$Expert <- as.factor(ifelse(data_pp$Expert==1, 0, 1))
 expert_level <- rma.mv(yi, vi, data = data_pp_es, random = ~ 1 | id, mods = Expert)
-expert_level #nicht sign. g = .2101, p = .0765
+expert_level #not sign. g = .2101, p = .0765
 data_pp_es$Novize <- as.factor(ifelse(data_pp$Expert==2, 0, 1))
 novize_level <- rma.mv(yi, vi, data = data_pp_es, random = ~ 1 | id, mods = Novize)
-novize_level #nicht sign. g = -.2101, p = .0765
+novize_level #not sign. g = -.2101, p = .0765
+
