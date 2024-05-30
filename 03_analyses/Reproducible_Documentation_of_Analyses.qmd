@@ -495,10 +495,10 @@ For each moderator we provide
 
 
 ### Representation
-
+#### Graphical representation
 ```{r}
 #| skimr_digits = 3
-#| 
+
 #graphical representation
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
@@ -540,7 +540,10 @@ sensitivity_moderator %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
 
 summary(sensitivity_moderator) 
-
+```
+#### Numerical representation
+```{r}
+#| skimr_digits = 3
 #numeric representation
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
@@ -582,7 +585,10 @@ sensitivity_moderator %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
 
 summary(sensitivity_moderator) 
-
+```
+#### Highlighting representation
+```{r}
+#| skimr_digits = 3
 #highlighting representation
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
@@ -624,7 +630,10 @@ sensitivity_moderator %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
 
 summary(sensitivity_moderator)
-
+```
+#### Text-based representation
+```{r}
+#| skimr_digits = 3
 #text-based representation
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
@@ -666,7 +675,10 @@ sensitivity_moderator %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
 
 summary(sensitivity_moderator) 
-
+```
+#### Multiple representation formats
+```{r}
+#| skimr_digits = 3
 #mono vs. multiple representation
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
@@ -710,8 +722,7 @@ sensitivity_moderator %>%
 summary(sensitivity_moderator) 
 ```
 
-### level of feedback
-
+### Level of feedback
 ```{r}
 #| skimr_digits = 3
 
@@ -756,7 +767,10 @@ sensitivity_moderator %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
 
 summary(sensitivity_moderator) 
-
+```
+#### Higher level only
+```{r}
+#| skimr_digits = 3
 ## HIGHER LEVEL ONLY ############################
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
@@ -798,7 +812,10 @@ sensitivity_moderator %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
 
 summary(sensitivity_moderator) 
-
+```
+####Both lower and higher level
+```{r}
+#| skimr_digits = 3
 ## BOTH LOWER AND HIGHER LEVEL ############################
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
@@ -843,7 +860,6 @@ summary(sensitivity_moderator)
 ```
 
 ### Specificity
-
 ```{r}
 #| skimr_digits = 3
 
@@ -893,7 +909,6 @@ summary(sensitivity_moderator)
 ### Tool numbers
 ```{r}
 #| skimr_digits = 3
-
 ## TOOL NUMBERS ############################
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
@@ -2007,11 +2022,9 @@ For each moderator we provide
 * a summary table of these parameters
 
 ### Representation
-
+#### Graphical representation
 ```{r}
 #| skimr_digits = 3
-
-## REPRESENTATION #######################
 #graphical representation
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
@@ -2064,7 +2077,10 @@ sensitivity_moderator %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
 
 summary(sensitivity_moderator) 
-
+```
+#### Numerical representation
+```{r}
+#| skimr_digits = 3
 #numeric representation
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
@@ -2117,7 +2133,10 @@ sensitivity_moderator %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
 
 summary(sensitivity_moderator) 
-
+```
+#### Highlighting representation
+```{r}
+#| skimr_digits = 3
 #highlighting representation
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
@@ -2170,7 +2189,10 @@ sensitivity_moderator %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
 
 summary(sensitivity_moderator) 
-
+```
+#### Text-based representation
+```{r}
+#| skimr_digits = 3
 #text-based representation
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
@@ -2223,7 +2245,10 @@ sensitivity_moderator %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
 
 summary(sensitivity_moderator) 
-
+```
+#### Multiple representation formats
+```{r}
+#| skimr_digits = 3
 #number of representations
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
@@ -2279,7 +2304,6 @@ summary(sensitivity_moderator)
 ```
 
 ### Level of feedback
-
 ```{r}
 #| skimr_digits = 3
 
@@ -2335,7 +2359,10 @@ sensitivity_moderator %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
 
 summary(sensitivity_moderator) 
-
+```
+#### Higher level only
+```{r}
+#| skimr_digits = 3
 ## HIGHER LEVEL ONLY ############################
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
@@ -2388,7 +2415,10 @@ sensitivity_moderator %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
 
 summary(sensitivity_moderator) 
-
+```
+#### Both lower and higher level
+```{r}
+#| skimr_digits = 3
 ## BOTH LOWER AND HIGHER LEVEL ############################
 sensitivity_moderator <- data.frame(
   ri_t = as.numeric(),
@@ -2444,7 +2474,6 @@ summary(sensitivity_moderator)
 ```
 
 ### Specificity
-
 ```{r}
 #| skimr_digits = 3
 ## SPECIFICITY ############################
@@ -2847,7 +2876,7 @@ sensitivity_moderator %>%
 summary(sensitivity_moderator) #mean = -.157, p = .726
 ```
 
-#Coding
+###Coding
 ```{r}
 #| skimr_digits = 3
 
