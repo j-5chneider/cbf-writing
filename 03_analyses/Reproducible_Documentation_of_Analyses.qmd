@@ -64,8 +64,8 @@ Two data sets were used:
 
 Download the data (embeded in this HTML file):
 
-* `r xfun::embed_file(here("02_data/05_major revision files/dataN33_prepost.sav"), text = "Download dataN33_prepost")`
-* `r xfun::embed_file(here("02_data/05_major revision files/dataN14_control.sav"), text = "Download dataN14_control")`
+* `r xfun::embed_file(here("02_data/05_major revision/dataN33_prepost.sav"), text = "Download dataN33_prepost")`
+* `r xfun::embed_file(here("02_data/05_major revision/dataN14_control.sav"), text = "Download dataN14_control")`
 
 ```{r import}
 # Data set: studies with pre-post design
@@ -83,12 +83,12 @@ dataN14_control <- read_sav(here("02_data/05_major revision/dataN14_control.sav"
 data_pp <- data.frame(
   sampleNr = 1:33,
   id = c(1,1,1,2,2,3,3,4,4,4,4,4,4,5,5,6,7,7,8,8,9,10,11,12,12,13,14,14,14,15,15, 16, 17),
-  m_pre = data$M_pre,
-  m_post = data$M_post,
-  sd_pre = data$SD_pre,
-  sd_post = data$SD_post,
-  ni = data$N,
-  slab = data$author)
+  m_pre = dataN33_prepost$M_pre,
+  m_post = dataN33_prepost$M_post,
+  sd_pre = dataN33_prepost$SD_pre,
+  sd_post = dataN33_prepost$SD_post,
+  ni = dataN33_prepost$N,
+  slab = dataN33_prepost$author)
 ```
 
 
@@ -519,7 +519,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
                        slab = data_pp$slab)
   # append the id variable
   data_pp_es$id <- data_pp$id
-  data_pp_es$rep_g <- as.factor(data$rep_graphical)
+  data_pp_es$rep_g <- as.factor(dataN33_prepost$rep_graphical)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = rep_g)
@@ -561,7 +561,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
                        slab = data_pp$slab)
   # append the id variable
   data_pp_es$id <- data_pp$id
-  data_pp_es$rep_n <- as.factor(data$rep_numeric)
+  data_pp_es$rep_n <- as.factor(dataN33_prepost$rep_numeric)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = rep_n)
@@ -603,7 +603,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
                        slab = data_pp$slab)
   # append the id variable
   data_pp_es$id <- data_pp$id
-  data_pp_es$rep_h <- as.factor(data$rep_highlighting)
+  data_pp_es$rep_h <- as.factor(dataN33_prepost$rep_highlighting)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = rep_h)
@@ -645,7 +645,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
                        slab = data_pp$slab)
   # append the id variable
   data_pp_es$id <- data_pp$id
-  data_pp_es$rep_t <- as.factor(data$rep_text_based)
+  data_pp_es$rep_t <- as.factor(dataN33_prepost$rep_text_based)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = rep_t)
@@ -687,7 +687,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
                        slab = data_pp$slab)
   # append the id variable
   data_pp_es$id <- data_pp$id
-  data_pp_es$rep_nr <- as.factor(data$rep_nr)
+  data_pp_es$rep_nr <- as.factor(dataN33_prepost$rep_nr)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = rep_nr)
@@ -735,7 +735,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
                        slab = data_pp$slab)
   # append the id variable
   data_pp_es$id <- data_pp$id
-  data_pp_es$order<- as.factor(data$FB_order)
+  data_pp_es$order<- as.factor(dataN33_prepost$FB_order)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = order)
@@ -777,7 +777,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
                        slab = data_pp$slab)
   # append the id variable
   data_pp_es$id <- data_pp$id
-  data_pp_es$order_hi <- as.factor(ifelse(data$FB_order == 2, 1, 0))
+  data_pp_es$order_hi <- as.factor(ifelse(dataN33_prepost$FB_order == 2, 1, 0))
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = order_hi)
@@ -819,7 +819,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
                        slab = data_pp$slab)
   # append the id variable
   data_pp_es$id <- data_pp$id
-  data_pp_es$order_hilow <- ifelse(data$FB_order == 3, 1, 0)
+  data_pp_es$order_hilow <- ifelse(dataN33_prepost$FB_order == 3, 1, 0)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = order_hilow)
@@ -867,9 +867,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
                        slab = data_pp$slab)
   # append the id variable
   data_pp_es$id <- data_pp$id
-  data_pp_es$spec <- as.factor(data$FB_specificity)
-  data_pp_es$holistic <- ifelse(data$FB_specificity == 1, 1, 0)
-  data_pp_es$analytic <- ifelse(data$FB_specificity == 2, 1, 0)
+  data_pp_es$spec <- as.factor(dataN33_prepost$FB_specificity)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = spec)
@@ -893,7 +891,6 @@ summary(sensitivity_moderator)
 ```
 
 ### Tool numbers
-
 ```{r}
 #| skimr_digits = 3
 
@@ -917,7 +914,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
                        slab = data_pp$slab)
   # append the id variable
   data_pp_es$id <- data_pp$id
-  data_pp_es$tool <- as.factor(data$FB_tool_numbers)
+  data_pp_es$tool <- as.factor(dataN33_prepost$FB_tool_numbers)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = tool)
@@ -946,7 +943,7 @@ CohViz
 criterion <- rma(yi, vi, data=data_pp_es, subset = tool =="2") 
 criterion
 
-writingPal <- rma(yi, vi, data=data_pp_es, subset = tool =="3") #estimate = .204, se = .040, p < .0001
+writingPal <- rma(yi, vi, data=data_pp_es, subset = tool =="3") 
 writingPal
 
 NCWrite <- rma(yi, vi, data=data_pp_es, subset = tool =="4") 
@@ -972,13 +969,12 @@ dat.comp
 rma(estimate, sei=stderror, mods = ~ meta, method="FE", data=dat.comp, digits=3) 
 
 
-data_pp_es$tool <- data$FB_tool
+data_pp_es$tool <- dataN33_prepost$FB_tool_numbers
 res <- rma(yi, vi, mods = ~ factor(tool), data=data_pp_es)
 res
 ```
 
 ### Prior knowledge
-
 ```{r}
 #| skimr_digits = 3
 
@@ -1002,7 +998,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
                        slab = data_pp$slab)
   # append the id variable
   data_pp_es$id <- data_pp$id
-  data_pp_es$WQP_pre <- as.factor(data$WQP_pre)
+  data_pp_es$WQP_pre <- as.factor(dataN33_prepost$WQP_pre)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = WQP_pre)
@@ -1049,7 +1045,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
                        slab = data_pp$slab)
   # append the id variable
   data_pp_es$id <- data_pp$id
-  data_pp_es$setting <- as.factor(data$setting)
+  data_pp_es$setting <- as.factor(dataN33_prepost$setting)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = setting)
@@ -1096,7 +1092,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
                        slab = data_pp$slab)
   # append the id variable
   data_pp_es$id <- data_pp$id
-  data_pp_es$edu <- as.factor(data$education_dummy)
+  data_pp_es$edu <- as.factor(dataN33_prepost$education_dummy)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = edu)
@@ -1143,7 +1139,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
                        slab = data_pp$slab)
   # append the id variable
   data_pp_es$id <- data_pp$id
-  data_pp_es$post_measure <- as.factor(data$post_measure)
+  data_pp_es$post_measure <- as.factor(dataN33_prepost$post_measure)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = post_measure)
@@ -1190,7 +1186,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
                        slab = data_pp$slab)
   # append the id variable
   data_pp_es$id <- data_pp$id
-  data_pp_es$amount <- as.factor(data$amount)
+  data_pp_es$amount <- as.factor(dataN33_prepost$amount)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = amount)
@@ -1237,7 +1233,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
                        slab = data_pp$slab)
   # append the id variable
   data_pp_es$id <- data_pp$id
-  data_pp_es$coding <- as.factor(data$coding)
+  data_pp_es$coding <- as.factor(dataN33_prepost$coding)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = coding)
@@ -1284,7 +1280,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
                        slab = data_pp$slab)
   # append the id variable
   data_pp_es$id <- data_pp$id
-  data_pp_es$order_outcome <- as.factor(data$order_outcome)
+  data_pp_es$order_outcome <- as.factor(dataN33_prepost$order_outcome)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = order_outcome)
@@ -1332,7 +1328,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
                        slab = data_pp$slab)
   # append the id variable
   data_pp_es$id <- data_pp$id
-  data_pp_es$experiment <- as.factor(data$experiment)
+  data_pp_es$experiment <- as.factor(dataN33_prepost$experiment)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = experiment)
@@ -1379,7 +1375,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
                        slab = data_pp$slab)
   # append the id variable
   data_pp_es$id <- data_pp$id
-  data_pp_es$system <- as.factor(data$system_type)
+  data_pp_es$system <- as.factor(dataN33_prepost$system_type)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = system)
@@ -1426,7 +1422,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
                        slab = data_pp$slab)
   # append the id variable
   data_pp_es$id <- data_pp$id
-  data_pp_es$teacher <- as.factor(data$teacher_effects)
+  data_pp_es$teacher <- as.factor(dataN33_prepost$teacher_effects)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = teacher)
@@ -1473,7 +1469,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
                        slab = data_pp$slab)
   # append the id variable
   data_pp_es$id <- data_pp$id
-  data_pp_es$validated_tool <- as.factor(data$validated_tool)
+  data_pp_es$validated_tool <- as.factor(dataN33_prepost$validated_tool)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = validated_tool)
@@ -1520,7 +1516,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
                        slab = data_pp$slab)
   # append the id variable
   data_pp_es$id <- data_pp$id
-  data_pp_es$reliability <- as.factor(data$reliability_measurement)
+  data_pp_es$reliability <- as.factor(dataN33_prepost$reliability_measurement)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = reliability)
@@ -1567,7 +1563,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
                        slab = data_pp$slab)
   # append the id variable
   data_pp_es$id <- data_pp$id
-  data_pp_es$fidelity <- as.factor(data$treatment_fidelity)
+  data_pp_es$fidelity <- as.factor(dataN33_prepost$treatment_fidelity)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = fidelity)
@@ -1614,7 +1610,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
                        slab = data_pp$slab)
   # append the id variable
   data_pp_es$id <- data_pp$id
-  data_pp_es$tests <- as.factor(data$writing_tests)
+  data_pp_es$tests <- as.factor(dataN33_prepost$writing_tests)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = tests)
@@ -1645,22 +1641,22 @@ summary(sensitivity_moderator)
 datT <- data.frame(
   sampleNr = 1:14,
   id = c(1,1,1,2,2,3,3,4,4,5,6,6,7,8),
-  m_pre = data$M_Feedback,
-  m_post = data$M_Feedback2,
-  sd_pre = data$SD_Feedback,
-  sd_post = data$SD_Feedback2,
-  ni = data$N_Feedback, 
-  slab = data$author)
+  m_pre = dataN14_control$M_Feedback,
+  m_post = dataN14_control$M_Feedback2,
+  sd_pre = dataN14_control$SD_Feedback,
+  sd_post = dataN14_control$SD_Feedback2,
+  ni = dataN14_control$N_Feedback, 
+  slab = dataN14_control$author)
 
 datC <- data.frame(
   sampleNr = 1:14,
   id = c(1,1,1,2,2,3,3,4,4,5,6,6,7,8),
-  m_pre = data$M_NoFeedback,
-  m_post = data$M_NoFeedback2,
-  sd_pre = data$SD_NoFeedback,
-  sd_post = data$SD_NoFeedback2,
-  ni = data$N_noFeedback, 
-  slab = data$author)
+  m_pre = dataN14_control$M_NoFeedback,
+  m_post = dataN14_control$M_NoFeedback2,
+  sd_pre = dataN14_control$SD_NoFeedback,
+  sd_post = dataN14_control$SD_NoFeedback2,
+  ni = dataN14_control$N_noFeedback, 
+  slab = dataN14_control$author)
 ```
 
 ## Meta-analytic effect
@@ -2047,7 +2043,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
   dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
   
   dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
-  dat$rep_g <- as.factor(data$rep_graphical)
+  dat$rep_g <- as.factor(dataN14_control$rep_graphical)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = rep_g)
@@ -2100,7 +2096,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
   dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
   
   dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
-  dat$rep_n <- as.factor(data$rep_numeric)
+  dat$rep_n <- as.factor(dataN14_control$rep_numeric)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = rep_n)
@@ -2153,7 +2149,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
   dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
   
   dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
-  dat$rep_h <- as.factor(data$rep_highlighting)
+  dat$rep_h <- as.factor(dataN14_control$rep_highlighting)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = rep_h)
@@ -2206,7 +2202,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
   dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
   
   dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
-  dat$rep_t <- as.factor(data$rep_text_based)
+  dat$rep_t <- as.factor(dataN14_control$rep_text_based)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = rep_t)
@@ -2259,7 +2255,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
   dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
   
   dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
-  dat$rep_nr <- as.factor(data$rep_nr)
+  dat$rep_nr <- as.factor(dataN14_control$rep_nr)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = rep_nr)
@@ -2318,7 +2314,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
   dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
   
   dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
-  dat$FB_order <- as.factor(data$FB_order)
+  dat$FB_order <- as.factor(dataN14_control$FB_order)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = FB_order)
@@ -2371,7 +2367,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
   dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
   
   dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
-  dat$order_hi <- as.factor(ifelse(data$FB_order == 2, 1, 0))
+  dat$order_hi <- as.factor(ifelse(dataN14_control$FB_order == 2, 1, 0))
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = order_hi)
@@ -2424,7 +2420,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
   dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
   
   dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
-  dat$order_hilow <- ifelse(data$FB_order == 3, 1, 0)
+  dat$order_hilow <- ifelse(dataN14_control$FB_order == 3, 1, 0)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = order_hilow)
@@ -2482,7 +2478,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
   dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
   
   dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
-  dat$spec <- as.factor(data$FB_specificity)
+  dat$spec <- as.factor(dataN14_control$FB_specificity)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = spec)
@@ -2540,7 +2536,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
   dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
   
   dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
-  dat$tool_nr <- as.factor(data$FB_tool_numbers)
+  dat$tool_nr <- as.factor(dataN14_control$FB_tool_numbers)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = tool_nr)
@@ -2598,7 +2594,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
   dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
   
   dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
-  dat$WQP_pre <- as.factor(data$WQP_FB_pre)
+  dat$WQP_pre <- as.factor(dataN14_control$WQP_FB_pre)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = WQP_pre)
@@ -2655,7 +2651,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
   dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
   
   dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
-  dat$setting <- as.factor(data$setting)
+  dat$setting <- as.factor(dataN14_control$setting)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = setting)
@@ -2712,7 +2708,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
   dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
   
   dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
-  dat$edu <- as.factor(data$education_dummy)
+  dat$edu <- as.factor(dataN14_control$education_dummy)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = edu)
@@ -2770,7 +2766,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
   dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
   
   dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
-  dat$post_measure <- as.factor(data$post_measure)
+  dat$post_measure <- as.factor(dataN14_control$post_measure)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = post_measure)
@@ -2828,7 +2824,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
   dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
   
   dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
-  dat$amount <- as.factor(data$amount)
+  dat$amount <- as.factor(dataN14_control$amount)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = amount)
@@ -2886,7 +2882,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
   dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
   
   dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
-  dat$coding <- as.factor(data$coding)
+  dat$coding <- as.factor(dataN14_control$coding)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = coding)
@@ -2944,7 +2940,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
   dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
   
   dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
-  dat$order_outcome <- as.factor(data$order_outcome)
+  dat$order_outcome <- as.factor(dataN14_control$order_outcome)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = order_outcome)
@@ -3002,7 +2998,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
   dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
   
   dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
-  dat$experiment <- as.factor(data$experiment)
+  dat$experiment <- as.factor(dataN14_control$experiment)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = experiment)
@@ -3060,7 +3056,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
   dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
   
   dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
-  dat$system <- as.factor(data$system_type)
+  dat$system <- as.factor(dataN14_control$system_type)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = system)
@@ -3118,7 +3114,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
   dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
   
   dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
-  dat$teacher <- as.factor(data$teacher_effects)
+  dat$teacher <- as.factor(dataN14_control$teacher_effects)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = teacher)
@@ -3176,7 +3172,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
   dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
   
   dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
-  dat$validated_tool <- as.factor(data$validated_tool)
+  dat$validated_tool <- as.factor(dataN14_control$validated_tool)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = validated_tool)
@@ -3234,7 +3230,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
   dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
   
   dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
-  dat$reliability <- as.factor(data$reliability_measurement)
+  dat$reliability <- as.factor(dataN14_control$reliability_measurement)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = reliability)
@@ -3288,7 +3284,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
   dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
   
   dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
-  dat$reliability_low <- ifelse(data$reliability_measurement == 0, 1, 0)
+  dat$reliability_low <- ifelse(dataN14_control$reliability_measurement == 0, 1, 0)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = reliability_low)
@@ -3341,7 +3337,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
   dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
   
   dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
-  dat$reliability_high <- ifelse(data$reliability_measurement == 1, 1, 0)
+  dat$reliability_high <- ifelse(dataN14_control$reliability_measurement == 1, 1, 0)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = reliability_high)
@@ -3394,7 +3390,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
   dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
   
   dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
-  dat$reliability_not <- ifelse(data$reliability_measurement == 2, 1, 0)
+  dat$reliability_not <- ifelse(dataN14_control$reliability_measurement == 2, 1, 0)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = reliability_not)
@@ -3452,7 +3448,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
   dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
   
   dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
-  dat$fidelity <- as.factor(data$treatment_fidelity)
+  dat$fidelity <- as.factor(dataN14_control$treatment_fidelity)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = fidelity)
@@ -3506,7 +3502,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
   dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
   
   dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
-  dat$fidelity_not <- ifelse(data$treatment_fidelity == 0, 1, 0)
+  dat$fidelity_not <- ifelse(dataN14_control$treatment_fidelity == 0, 1, 0)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = fidelity_not)
@@ -3559,7 +3555,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
   dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
   
   dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
-  dat$fidelity_low <- ifelse(data$treatment_fidelity == 1, 1, 0)
+  dat$fidelity_low <- ifelse(dataN14_control$treatment_fidelity == 1, 1, 0)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = fidelity_low)
@@ -3612,7 +3608,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
   dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
   
   dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
-  dat$fidelity_high <- ifelse(data$treatment_fidelity == 2, 1, 0)
+  dat$fidelity_high <- ifelse(dataN14_control$treatment_fidelity == 2, 1, 0)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = fidelity_high)
@@ -3670,7 +3666,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
   dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
   
   dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
-  dat$test <- as.factor(data$writing_tests)
+  dat$test <- as.factor(dataN14_control$writing_tests)
   
   # compute the meta-analysis
   RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = test)
