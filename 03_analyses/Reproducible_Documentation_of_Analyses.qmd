@@ -1,6 +1,6 @@
 ---
 title: "Reproducible documentation of analyses"
-subtitle: "Does Computer-Based Feedback Foster Expository Writing? A meta-analysis"
+subtitle: "Does Computer-Based Feedback Enhance Revision Performance in Writing Non-Fictional Texts? A Meta-Analysis"
 author:
   - name: "[blinded]"
     email: ""
