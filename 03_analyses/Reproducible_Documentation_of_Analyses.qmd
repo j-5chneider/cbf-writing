@@ -98,7 +98,7 @@ As we did not find the pre-post test correlation reported in any of the studies,
   
 One of the studies with control group design provided open data (Burkhart et al., 2020) so that we were able to calculate its pre-post-test correlations (r = .72), which we used as an anchor for the sensitivity analysis.  
   
-We included a broad range of 26 (conservative) plausible values in the sensitivity analyses with correlations from r= .50 - .75, using steps of .1.  
+We included a broad range of 26 (conservative) plausible values in the sensitivity analyses with correlations from r= .50 - .75, using steps of .01.  
   
 **This will produce results from 26 meta-analyses.** By the variation of results, we are able to estimate the robustness of our analyses.
 
@@ -2646,7 +2646,7 @@ sensitivity_moderator %>%
 summary(sensitivity_moderator)
 ```
 
-###Setting
+### Setting
 ```{r}
 #| skimr_digits = 3 
 ## SETTING ######################
@@ -2703,7 +2703,7 @@ sensitivity_moderator %>%
 summary(sensitivity_moderator) 
 ```
 
-###Educational level
+### Educational level
 ```{r}
 #| skimr_digits = 3
 ## EDUCATIONAL LEVEL dummy-coded #####################
@@ -2760,7 +2760,7 @@ sensitivity_moderator %>%
 summary(sensitivity_moderator) 
 ```
 
-#Post measure
+# Post measure
 ```{r}
 #| skimr_digits = 3
 
@@ -2818,7 +2818,7 @@ sensitivity_moderator %>%
 summary(sensitivity_moderator) 
 ```
 
-#Amount
+# Amount
 ```{r}
 #| skimr_digits = 3
 
@@ -2876,7 +2876,7 @@ sensitivity_moderator %>%
 summary(sensitivity_moderator) #mean = -.157, p = .726
 ```
 
-###Coding
+### Coding
 ```{r}
 #| skimr_digits = 3
 
@@ -2934,7 +2934,7 @@ sensitivity_moderator %>%
 summary(sensitivity_moderator) 
 ```
 
-###Level of outcome
+### Level of outcome
 ```{r}
 #| skimr_digits = 3
 
@@ -2992,7 +2992,7 @@ sensitivity_moderator %>%
 summary(sensitivity_moderator) 
 ```
 
-###Experiment
+### Experiment
 ```{r}
 #| skimr_digits = 3
 
@@ -3050,7 +3050,7 @@ sensitivity_moderator %>%
 summary(sensitivity_moderator) 
 ```
 
-###System
+### System
 ```{r}
 #| skimr_digits = 3
 
@@ -3108,7 +3108,7 @@ sensitivity_moderator %>%
 summary(sensitivity_moderator) 
 ```
 
-###Teacher effects
+### Teacher effects
 ```{r}
 #| skimr_digits = 3
 
@@ -3166,7 +3166,7 @@ sensitivity_moderator %>%
 summary(sensitivity_moderator) 
 ```
 
-###Validated tool
+### Validated tool
 ```{r}
 #| skimr_digits = 3
 
@@ -3224,7 +3224,7 @@ sensitivity_moderator %>%
 summary(sensitivity_moderator) 
 ```
 
-###Reliability of measure
+### Reliability of measure
 ```{r}
 #| skimr_digits = 3
 
@@ -3442,7 +3442,7 @@ sensitivity_moderator %>%
 summary(sensitivity_moderator)
 ```
 
-###Treatment fidelity
+### Treatment fidelity
 ```{r}
 #| skimr_digits = 3
 
@@ -3660,7 +3660,7 @@ sensitivity_moderator %>%
 summary(sensitivity_moderator)
 ```
 
-###Writing tasks
+### Writing tasks
 ```{r}
 #| skimr_digits = 3
 
