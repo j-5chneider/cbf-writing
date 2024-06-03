@@ -103,7 +103,7 @@ sensitivity <- data.frame(ri_t = as.numeric(),   # assumed pre-post correlation
                           beta = as.numeric(),   # meta-analytic ES
                           pvalue = as.numeric(), # p value of ES
                           se = as.numeric(),     # SE of meta-analytic ES
-                          tau2 = as.numeric(),   # Tau squared
+                          sigma2 = as.numeric(),   # Tau squared
                           yi.f01 = as.numeric(), # ES of individual studies
                           yi.f02 = as.numeric(),
                           yi.f03 = as.numeric(),
@@ -196,7 +196,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
             pvalue = rma_overall_clustered$pval,
             beta = rma_overall_clustered$beta[,1],
             se = rma_overall_clustered$se[1],
-            tau2 = rma_overall_clustered$tau2[1],
+            sigma2 = rma_overall_clustered$sigma2[1],
             yi.f01 = rma_overall_clustered$yi.f[1],
             yi.f02 = rma_overall_clustered$yi.f[2],
             yi.f03 = rma_overall_clustered$yi.f[3],
@@ -278,7 +278,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
 
 ```{r}
 sensitivity %>%
-  dplyr::select(ri_t, beta, se, pvalue, tau2) %>%
+  dplyr::select(ri_t, beta, se, pvalue, sigma2) %>%
   kbl() %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
 ```
@@ -317,7 +317,7 @@ sensitivity %>%
                    pvalue_mean        = mean(pvalue),
                    pvalue_min = min(pvalue),
                    pvalue_max = max(pvalue),
-                   tau2_mean = mean(tau2)) %>%
+                   sigma2_mean = mean(sigma2)) %>%
   kbl() %>%
   kable_styling(bootstrap_options = c("striped", "hover")) %>%
   column_spec(1, background = "#C74A48") %>%
@@ -343,7 +343,7 @@ sensitivity %>%
 ```{r}
 # compute mean, min and max of ES and CI from each study
 sensitivity %>%
-  dplyr::select(-c(beta, pvalue, se, tau2)) %>%
+  dplyr::select(-c(beta, pvalue, se, sigma2)) %>%
   pivot_longer(c(2:64),                       # reshape data from
                names_to = "variable",         # sensitivity analysis
                values_to = "values") %>%
@@ -505,7 +505,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -528,7 +528,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -552,7 +552,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -575,7 +575,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -599,7 +599,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -622,7 +622,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -646,7 +646,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -669,7 +669,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -693,7 +693,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -716,7 +716,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -742,7 +742,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -765,7 +765,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -789,7 +789,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -812,7 +812,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -836,7 +836,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -859,7 +859,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -885,7 +885,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -908,7 +908,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -933,7 +933,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -956,7 +956,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -1019,7 +1019,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -1042,7 +1042,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -1068,7 +1068,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -1091,7 +1091,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -1117,7 +1117,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -1140,7 +1140,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -1166,7 +1166,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -1189,7 +1189,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -1215,7 +1215,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -1238,7 +1238,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -1264,7 +1264,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -1287,7 +1287,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -1313,7 +1313,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -1336,7 +1336,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -1363,7 +1363,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -1386,7 +1386,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -1412,7 +1412,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -1435,7 +1435,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -1461,7 +1461,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -1484,7 +1484,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -1510,7 +1510,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -1533,7 +1533,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -1559,7 +1559,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -1582,7 +1582,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -1608,7 +1608,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -1631,7 +1631,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -1657,7 +1657,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -1680,7 +1680,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -1731,7 +1731,7 @@ sensitivity <- data.frame(ri_t = as.numeric(),  # assumed pre-post correlation t
                           pvalue = as.numeric(), # p value of ES
                           beta = as.numeric(),   # meta-analytic ES
                           se = as.numeric(),     # SE of meta-analytic ES
-                          tau2 = as.numeric(),   # tau squared
+                          sigma2 = as.numeric(),   # tau squared
                           yi.f01 = as.numeric(), # ES of individual studies
                           yi.f02 = as.numeric(),
                           yi.f03 = as.numeric(),
@@ -1791,7 +1791,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
             pvalue = rma_overall_clustered$pval,
             beta = rma_overall_clustered$beta[,1],
             se = rma_overall_clustered$se[1],
-            tau2 = rma_overall_clustered$tau2[1],
+            sigma2 = rma_overall_clustered$sigma2[1],
             yi.f01 = rma_overall_clustered$yi.f[1],
             yi.f02 = rma_overall_clustered$yi.f[2],
             yi.f03 = rma_overall_clustered$yi.f[3],
@@ -1836,7 +1836,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
 
 ```{r}
 sensitivity %>%
-  dplyr::select(ri_t, ri_c, beta, se, pvalue, tau2) %>%
+  dplyr::select(ri_t, ri_c, beta, se, pvalue, sigma2) %>%
   kbl() %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
 ```
@@ -1875,7 +1875,7 @@ sensitivity %>%
                    pvalue_mean        = mean(pvalue),
                    pvalue_min = min(pvalue),
                    pvalue_max = max(pvalue),
-                   tau2_mean = mean(tau2)) %>%
+                   sigma2_mean = mean(sigma2)) %>%
   kbl() %>%
   kable_styling(bootstrap_options = c("striped", "hover")) %>%
   column_spec(1, background = "#C74A48") %>%
@@ -1902,7 +1902,7 @@ sensitivity %>%
 ```{r}
 # compute mean, min and max of ES and CI from each study
 sensitivity %>%
-  dplyr::select(-c(beta, pvalue, se, tau2)) %>%
+  dplyr::select(-c(beta, pvalue, se, sigma2)) %>%
   pivot_longer(c(3:30),                       # reshape data data from
                names_to = "variable",         # sensitivity analysis
                values_to = "values") %>%
@@ -2082,7 +2082,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -2116,7 +2116,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -2140,7 +2140,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -2174,7 +2174,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -2198,7 +2198,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -2232,7 +2232,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -2256,7 +2256,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -2290,7 +2290,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -2314,7 +2314,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -2348,7 +2348,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -2374,7 +2374,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -2408,7 +2408,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -2432,7 +2432,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -2466,7 +2466,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -2490,7 +2490,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -2524,7 +2524,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -2549,7 +2549,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -2583,7 +2583,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -2609,7 +2609,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -2643,7 +2643,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -2669,7 +2669,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -2703,7 +2703,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -2728,7 +2728,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -2762,7 +2762,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -2787,7 +2787,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -2821,7 +2821,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -2847,7 +2847,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -2881,7 +2881,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -2907,7 +2907,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -2941,7 +2941,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -2967,7 +2967,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -3001,7 +3001,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -3027,7 +3027,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -3061,7 +3061,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -3087,7 +3087,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -3121,7 +3121,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -3147,7 +3147,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -3181,7 +3181,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -3207,7 +3207,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -3241,7 +3241,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -3267,7 +3267,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -3301,7 +3301,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -3327,7 +3327,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -3361,7 +3361,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -3383,7 +3383,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -3417,7 +3417,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -3438,7 +3438,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -3472,7 +3472,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -3493,7 +3493,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -3527,7 +3527,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -3553,7 +3553,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -3587,7 +3587,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -3609,7 +3609,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -3643,7 +3643,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -3664,7 +3664,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -3698,7 +3698,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -3719,7 +3719,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -3753,7 +3753,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -3779,7 +3779,7 @@ sensitivity_moderator <- data.frame(
   ci.lb = as.numeric(),
   ci.ub = as.numeric(),
   pvalue = as.numeric(),
-  tau2 = as.numeric()
+  sigma2 = as.numeric()
 )
 
 for (ri_t in seq(from = .50, to=.75, by=.01)) {
@@ -3813,7 +3813,7 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
     add_row(ri_t = ri_t, 
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
-            tau2 = RMA$tau2[1],
+            sigma2 = RMA$sigma2[1],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
