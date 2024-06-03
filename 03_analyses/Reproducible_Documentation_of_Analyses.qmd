@@ -344,7 +344,7 @@ sensitivity %>%
 # compute mean, min and max of ES and CI from each study
 sensitivity %>%
   dplyr::select(-c(beta, pvalue, se, sigma2)) %>%
-  pivot_longer(c(2:64),                       # reshape data from
+  pivot_longer(c(2:67),                       # reshape data from
                names_to = "variable",         # sensitivity analysis
                values_to = "values") %>%
   mutate(sampleNr = as.numeric(str_sub(variable, -2, -1)),
@@ -1594,6 +1594,133 @@ sensitivity_moderator %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
 
 summary(sensitivity_moderator)
+
+
+#not specified
+sensitivity_moderator <- data.frame(
+  ri_t = as.numeric(),
+  beta = as.numeric(),
+  se = as.numeric(),
+  ci.lb = as.numeric(),
+  ci.ub = as.numeric(),
+  pvalue = as.numeric()
+)
+
+for (ri_t in seq(from = .50, to=.75, by=.01)) {
+  ###compute effect sizes for writing quality
+  # effect sizes from within-subjects data
+  data_pp_es <- escalc(measure = "SMCR",
+                       m1i=data_pp$m_post, m2i=data_pp$m_pre,
+                       sd1i=data_pp$sd_pre, sd2i=data_pp$sd_post,
+                       ni=data_pp$ni, ri=rep(ri_t, 33),
+                       slab = data_pp$slab)
+  # append the id variable
+  data_pp_es$id <- data_pp$id
+  data_pp_es$reliable_not <- ifelse(dataN33_prepost$reliability_measurement == 2, 1, 0)
+  
+  # compute the meta-analysis
+  RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = reliable_not)
+  
+  # save estimates for sensitivity analysis
+  sensitivity_moderator <- sensitivity_moderator %>%
+    add_row(ri_t = ri_t, 
+            beta = RMA$beta[,1][2],
+            se = RMA$se[2],
+            ci.lb = RMA$ci.lb[2],
+            ci.ub = RMA$ci.ub[2],
+            pvalue = RMA$pval[2]
+    )
+}
+
+sensitivity_moderator %>%
+  kbl() %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+summary(sensitivity_moderator) 
+
+#less than .7
+sensitivity_moderator <- data.frame(
+  ri_t = as.numeric(),
+  beta = as.numeric(),
+  se = as.numeric(),
+  ci.lb = as.numeric(),
+  ci.ub = as.numeric(),
+  pvalue = as.numeric()
+)
+
+for (ri_t in seq(from = .50, to=.75, by=.01)) {
+  ###compute effect sizes for writing quality
+  # effect sizes from within-subjects data
+  data_pp_es <- escalc(measure = "SMCR",
+                       m1i=data_pp$m_post, m2i=data_pp$m_pre,
+                       sd1i=data_pp$sd_pre, sd2i=data_pp$sd_post,
+                       ni=data_pp$ni, ri=rep(ri_t, 33),
+                       slab = data_pp$slab)
+  # append the id variable
+  data_pp_es$id <- data_pp$id
+  data_pp_es$reliable_less <- ifelse(dataN33_prepost$reliability_measurement == 0, 1, 0)
+  
+  # compute the meta-analysis
+  RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = reliable_less)
+  
+  # save estimates for sensitivity analysis
+  sensitivity_moderator <- sensitivity_moderator %>%
+    add_row(ri_t = ri_t, 
+            beta = RMA$beta[,1][2],
+            se = RMA$se[2],
+            ci.lb = RMA$ci.lb[2],
+            ci.ub = RMA$ci.ub[2],
+            pvalue = RMA$pval[2]
+    )
+}
+
+sensitivity_moderator %>%
+  kbl() %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+summary(sensitivity_moderator)
+
+#greater than .7
+sensitivity_moderator <- data.frame(
+  ri_t = as.numeric(),
+  beta = as.numeric(),
+  se = as.numeric(),
+  ci.lb = as.numeric(),
+  ci.ub = as.numeric(),
+  pvalue = as.numeric()
+)
+
+for (ri_t in seq(from = .50, to=.75, by=.01)) {
+  ###compute effect sizes for writing quality
+  # effect sizes from within-subjects data
+  data_pp_es <- escalc(measure = "SMCR",
+                       m1i=data_pp$m_post, m2i=data_pp$m_pre,
+                       sd1i=data_pp$sd_pre, sd2i=data_pp$sd_post,
+                       ni=data_pp$ni, ri=rep(ri_t, 33),
+                       slab = data_pp$slab)
+  # append the id variable
+  data_pp_es$id <- data_pp$id
+  data_pp_es$reliable_large <- ifelse(dataN33_prepost$reliability_measurement == 1, 1, 0)
+  
+  # compute the meta-analysis
+  RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = reliable_large)
+  
+  # save estimates for sensitivity analysis
+  sensitivity_moderator <- sensitivity_moderator %>%
+    add_row(ri_t = ri_t, 
+            beta = RMA$beta[,1][2],
+            se = RMA$se[2],
+            ci.lb = RMA$ci.lb[2],
+            ci.ub = RMA$ci.ub[2],
+            pvalue = RMA$pval[2]
+    )
+}
+
+sensitivity_moderator %>%
+  kbl() %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+summary(sensitivity_moderator)
 ```
 
 ###Treatment fidelity
@@ -1632,6 +1759,136 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
             sigma2 = RMA$sigma2[1],
+            ci.lb = RMA$ci.lb[2],
+            ci.ub = RMA$ci.ub[2],
+            pvalue = RMA$pval[2]
+    )
+}
+
+sensitivity_moderator %>%
+  kbl() %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+summary(sensitivity_moderator)
+
+
+#not specified
+sensitivity_moderator <- data.frame(
+  ri_t = as.numeric(),
+  beta = as.numeric(),
+  se = as.numeric(),
+  ci.lb = as.numeric(),
+  ci.ub = as.numeric(),
+  pvalue = as.numeric()
+)
+
+for (ri_t in seq(from = .50, to=.75, by=.01)) {
+  ###compute effect sizes for writing quality
+  # effect sizes from within-subjects data
+  data_pp_es <- escalc(measure = "SMCR",
+                       m1i=data_pp$m_post, m2i=data_pp$m_pre,
+                       sd1i=data_pp$sd_pre, sd2i=data_pp$sd_post,
+                       ni=data_pp$ni, ri=rep(ri_t, 33),
+                       slab = data_pp$slab)
+  # append the id variable
+  data_pp_es$id <- data_pp$id
+  data_pp_es$fidelity_not <- ifelse(dataN33_prepost$treatment_fidelity == 0, 1, 0)
+  
+  
+  # compute the meta-analysis
+  RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = fidelity_not)
+  
+  # save estimates for sensitivity analysis
+  sensitivity_moderator <- sensitivity_moderator %>%
+    add_row(ri_t = ri_t, 
+            beta = RMA$beta[,1][2],
+            se = RMA$se[2],
+            ci.lb = RMA$ci.lb[2],
+            ci.ub = RMA$ci.ub[2],
+            pvalue = RMA$pval[2]
+    )
+}
+
+sensitivity_moderator %>%
+  kbl() %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+summary(sensitivity_moderator) 
+
+#partially reported
+sensitivity_moderator <- data.frame(
+  ri_t = as.numeric(),
+  beta = as.numeric(),
+  se = as.numeric(),
+  ci.lb = as.numeric(),
+  ci.ub = as.numeric(),
+  pvalue = as.numeric()
+)
+
+for (ri_t in seq(from = .50, to=.75, by=.01)) {
+  ###compute effect sizes for writing quality
+  # effect sizes from within-subjects data
+  data_pp_es <- escalc(measure = "SMCR",
+                       m1i=data_pp$m_post, m2i=data_pp$m_pre,
+                       sd1i=data_pp$sd_pre, sd2i=data_pp$sd_post,
+                       ni=data_pp$ni, ri=rep(ri_t, 33),
+                       slab = data_pp$slab)
+  # append the id variable
+  data_pp_es$id <- data_pp$id
+  data_pp_es$fidelity_part <- ifelse(dataN33_prepost$treatment_fidelity == 1, 1, 0)
+  
+  
+  # compute the meta-analysis
+  RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = fidelity_part)
+  
+  # save estimates for sensitivity analysis
+  sensitivity_moderator <- sensitivity_moderator %>%
+    add_row(ri_t = ri_t, 
+            beta = RMA$beta[,1][2],
+            se = RMA$se[2],
+            ci.lb = RMA$ci.lb[2],
+            ci.ub = RMA$ci.ub[2],
+            pvalue = RMA$pval[2]
+    )
+}
+
+sensitivity_moderator %>%
+  kbl() %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+summary(sensitivity_moderator)
+
+#lot of explanations
+sensitivity_moderator <- data.frame(
+  ri_t = as.numeric(),
+  beta = as.numeric(),
+  se = as.numeric(),
+  ci.lb = as.numeric(),
+  ci.ub = as.numeric(),
+  pvalue = as.numeric()
+)
+
+for (ri_t in seq(from = .50, to=.75, by=.01)) {
+  ###compute effect sizes for writing quality
+  # effect sizes from within-subjects data
+  data_pp_es <- escalc(measure = "SMCR",
+                       m1i=data_pp$m_post, m2i=data_pp$m_pre,
+                       sd1i=data_pp$sd_pre, sd2i=data_pp$sd_post,
+                       ni=data_pp$ni, ri=rep(ri_t, 33),
+                       slab = data_pp$slab)
+  # append the id variable
+  data_pp_es$id <- data_pp$id
+  data_pp_es$fidelity_yes <- ifelse(dataN33_prepost$treatment_fidelity == 2, 1, 0)
+  
+  
+  # compute the meta-analysis
+  RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = fidelity_yes)
+  
+  # save estimates for sensitivity analysis
+  sensitivity_moderator <- sensitivity_moderator %>%
+    add_row(ri_t = ri_t, 
+            beta = RMA$beta[,1][2],
+            se = RMA$se[2],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
@@ -1692,6 +1949,91 @@ sensitivity_moderator %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
 
 summary(sensitivity_moderator)
+
+
+#self-constructed
+sensitivity_moderator <- data.frame(
+  ri_t = as.numeric(),
+  beta = as.numeric(),
+  se = as.numeric(),
+  ci.lb = as.numeric(),
+  ci.ub = as.numeric(),
+  pvalue = as.numeric()
+)
+
+for (ri_t in seq(from = .50, to=.75, by=.01)) {
+  ###compute effect sizes for writing quality
+  # effect sizes from within-subjects data
+  data_pp_es <- escalc(measure = "SMCR",
+                       m1i=data_pp$m_post, m2i=data_pp$m_pre,
+                       sd1i=data_pp$sd_pre, sd2i=data_pp$sd_post,
+                       ni=data_pp$ni, ri=rep(ri_t, 33),
+                       slab = data_pp$slab)
+  # append the id variable
+  data_pp_es$id <- data_pp$id
+  data_pp_es$tests_self <- ifelse(dataN33_prepost$writing_tests == 0, 1, 0)
+  
+  # compute the meta-analysis
+  RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = tests_self)
+  
+  # save estimates for sensitivity analysis
+  sensitivity_moderator <- sensitivity_moderator %>%
+    add_row(ri_t = ri_t, 
+            beta = RMA$beta[,1][2],
+            se = RMA$se[2],
+            ci.lb = RMA$ci.lb[2],
+            ci.ub = RMA$ci.ub[2],
+            pvalue = RMA$pval[2]
+    )
+}
+
+sensitivity_moderator %>%
+  kbl() %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+summary(sensitivity_moderator) 
+
+#standardized tests
+sensitivity_moderator <- data.frame(
+  ri_t = as.numeric(),
+  beta = as.numeric(),
+  se = as.numeric(),
+  ci.lb = as.numeric(),
+  ci.ub = as.numeric(),
+  pvalue = as.numeric()
+)
+
+for (ri_t in seq(from = .50, to=.75, by=.01)) {
+  ###compute effect sizes for writing quality
+  # effect sizes from within-subjects data
+  data_pp_es <- escalc(measure = "SMCR",
+                       m1i=data_pp$m_post, m2i=data_pp$m_pre,
+                       sd1i=data_pp$sd_pre, sd2i=data_pp$sd_post,
+                       ni=data_pp$ni, ri=rep(ri_t, 33),
+                       slab = data_pp$slab)
+  # append the id variable
+  data_pp_es$id <- data_pp$id
+  data_pp_es$tests_norm <- ifelse(dataN33_prepost$writing_tests == 2, 1, 0)
+  
+  # compute the meta-analysis
+  RMA <- rma.mv(yi, vi, data=data_pp_es, random = ~ 1 | id, mods = tests_norm)
+  
+  # save estimates for sensitivity analysis
+  sensitivity_moderator <- sensitivity_moderator %>%
+    add_row(ri_t = ri_t, 
+            beta = RMA$beta[,1][2],
+            se = RMA$se[2],
+            ci.lb = RMA$ci.lb[2],
+            ci.ub = RMA$ci.ub[2],
+            pvalue = RMA$pval[2]
+    )
+}
+
+sensitivity_moderator %>%
+  kbl() %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+summary(sensitivity_moderator) 
 ```
 
 
@@ -3814,6 +4156,113 @@ for (ri_t in seq(from = .50, to=.75, by=.01)) {
             beta = RMA$beta[,1][2],
             se = RMA$se[2],
             sigma2 = RMA$sigma2[1],
+            ci.lb = RMA$ci.lb[2],
+            ci.ub = RMA$ci.ub[2],
+            pvalue = RMA$pval[2]
+    )
+}
+
+sensitivity_moderator %>%
+  kbl() %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+summary(sensitivity_moderator)
+
+
+#self-conducted
+sensitivity_moderator <- data.frame(
+  ri_t = as.numeric(),
+  beta = as.numeric(),
+  se = as.numeric(),
+  ci.lb = as.numeric(),
+  ci.ub = as.numeric(),
+  pvalue = as.numeric()
+)
+
+for (ri_t in seq(from = .50, to=.75, by=.01)) {
+  ###compute effect sizes for writing quality
+  # effect sizes from within-subjects data
+  datT_es<- escalc(measure = "SMCR",
+                   m1i=datT$m_post, m2i=datT$m_pre,
+                   sd1i=datT$sd_pre, sd2i=datT$sd_post,
+                   ni=datT$ni, ri=rep(ri_t, 14),
+                   slab = datT$slab)
+  
+  datT_es$id <- datT$id
+  
+  datC_es <- escalc(measure="SMCR",
+                    m1i=datC$m_post, m2i=datC$m_pre,
+                    sd1i=datC$sd_pre, sd2i=datC$sd_post,
+                    ni=datC$ni, ri=rep((ri_t+.14), 14),
+                    slab = datC$slab)
+  datC_es$id<-datC$id
+  
+  dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
+  
+  dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
+  dat$tests_self <- ifelse(dataN14_control$writing_tests == 0, 1, 0)
+  
+  # compute the meta-analysis
+  RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = tests_self)
+  
+  # save estimates for sensitivity analysis
+  sensitivity_moderator <- sensitivity_moderator %>%
+    add_row(ri_t = ri_t, 
+            beta = RMA$beta[,1][2],
+            se = RMA$se[2],
+            ci.lb = RMA$ci.lb[2],
+            ci.ub = RMA$ci.ub[2],
+            pvalue = RMA$pval[2]
+    )
+}
+
+sensitivity_moderator %>%
+  kbl() %>%
+  kable_styling(bootstrap_options = c("striped", "hover"))
+
+summary(sensitivity_moderator)
+
+#standardized tests
+sensitivity_moderator <- data.frame(
+  ri_t = as.numeric(),
+  beta = as.numeric(),
+  se = as.numeric(),
+  ci.lb = as.numeric(),
+  ci.ub = as.numeric(),
+  pvalue = as.numeric()
+)
+
+for (ri_t in seq(from = .50, to=.75, by=.01)) {
+  ###compute effect sizes for writing quality
+  # effect sizes from within-subjects data
+  datT_es<- escalc(measure = "SMCR",
+                   m1i=datT$m_post, m2i=datT$m_pre,
+                   sd1i=datT$sd_pre, sd2i=datT$sd_post,
+                   ni=datT$ni, ri=rep(ri_t, 14),
+                   slab = datT$slab)
+  
+  datT_es$id <- datT$id
+  
+  datC_es <- escalc(measure="SMCR",
+                    m1i=datC$m_post, m2i=datC$m_pre,
+                    sd1i=datC$sd_pre, sd2i=datC$sd_post,
+                    ni=datC$ni, ri=rep((ri_t+.14), 14),
+                    slab = datC$slab)
+  datC_es$id<-datC$id
+  
+  dat <- data.frame(yi = datT_es$yi - datC_es$yi, vi = datT_es$vi + datC_es$vi)
+  
+  dat$id <- c(1,1,1,2,2,3,3,4,4,5,6,6,7,8)
+  dat$tests_norm <- ifelse(dataN14_control$writing_tests == 2, 1, 0)
+  
+  # compute the meta-analysis
+  RMA <- rma.mv(yi, vi, data=dat, random = ~ 1 | id, mods = tests_norm)
+  
+  # save estimates for sensitivity analysis
+  sensitivity_moderator <- sensitivity_moderator %>%
+    add_row(ri_t = ri_t, 
+            beta = RMA$beta[,1][2],
+            se = RMA$se[2],
             ci.lb = RMA$ci.lb[2],
             ci.ub = RMA$ci.ub[2],
             pvalue = RMA$pval[2]
