@@ -417,6 +417,8 @@ forest(REM)
 
 ### Fitting models
 
+Model 1 without cluster vs. Model 2 clustered for author. Better fit for Model 2.
+
 ```{r}
 
 model1 <- rma.mv(
@@ -435,7 +437,7 @@ model2 <- rma.mv(
 modelfit<-anova(model1, model2)
 modelfit #better fit for model 2
 
-
+##Robust variance estimation
 # RVE without cluster (dummy coded)
 robust(REM, cluster = id)
 
