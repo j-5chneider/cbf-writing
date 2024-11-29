@@ -577,13 +577,13 @@ for (mod in moderators) {
   qtest_results_moderation <- rbind(qtest_results_moderation, data.frame(moderator = mod, q_test = qtest))}
   
 # Customize dataset -------------------------------------------------------
-number_of_effects <- data_pp_es %>%
+number_of_effects <- data_pp %>%
   dplyr::select(any_of(moderators)) %>%
   pivot_longer(everything(), names_to = "moderator", 
                values_to = "term", values_transform = as.character) %>%
   count(moderator, term, name = "k")
 
-descriptive_data <- data_pp_es %>%
+descriptive_data <- data_pp %>%
   dplyr::select(N, any_of(moderators)) %>%
   pivot_longer(-N, names_to = "moderator", 
                values_to = "term", values_transform = as.character) %>%
@@ -635,7 +635,7 @@ generate_contrast_matrix <- function(p) {
 results_posthoc <- data.frame()
 
 for (mod in moderators) {
-  result <- fn_meta_pre_post(moderator = mod, cor = r_prepost, data = data_pp_es)
+  result <- fn_meta_pre_post(moderator = mod, cor = r_prepost, data_pp_es = data_pp)
   result_posthoc <- result %>% broom::tidy()
   result_posthoc$moderator <- mod
   contrast_matrix <- generate_contrast_matrix(result$p)
@@ -934,16 +934,16 @@ forest(REM)
 Model 1 without cluster vs. Model 2 clustered for author. Better fit for Model 2.
 
 ```{r}
-model1 <- rma.mv(
+model1 <- rma.mv(  # JS
   yi = yi, 
   V = vi, 
-  data = data_c,
+  data = dat,
   method = "REML")
 
 model2 <- rma.mv(
   yi = yi, 
   V = vi, 
-  data = data_c,
+  data = dat,
   random = ~ 1 | author,
   method = "REML")
 
@@ -1028,12 +1028,12 @@ dat <- data_c %>%
   mutate(yi = dat_es_exp$yi - dat_es_con$yi,
          vi = dat_es_exp$vi + dat_es_con$vi)
 
-V <- vcalc(vi = vi, cluster = author, subgroup = group, data = data_c)
+V <- vcalc(vi = vi, cluster = author, subgroup = group, data = dat)
 
 REM <- rma.mv(
     yi = yi, 
     V = V, 
-    data = data,
+    data = dat,
     mods = as.formula(paste("~ factor(", moderator, ") - 1")),
     random = ~ 1 | author,
     method = "REML",
@@ -1085,7 +1085,7 @@ moderators <- c("rep_numeric", "rep_graphical", "rep_highlighting",
                 "order_outcome", "reliability_measurement", "treatment_fidelity", 
                 "writing_tests", "rank_mean_wq", "post_measure", "experiment", 
                 "validated_tool", "ceiling_or_flooring_effect", "pretest_equivalence", 
-                "fb_tool_numbers", "manuscript_type", "education_dummy", 
+                "FB_tool_numbers", "manuscript_type", "education_dummy", 
                 "setting", "country", "genre", "amount",
                 "coding", "system_type", "teacher_effects"
 )
@@ -1094,7 +1094,8 @@ moderators <- c("rep_numeric", "rep_graphical", "rep_highlighting",
 results_moderation <- data.frame()
 
 for (mod in moderators) {
-  result <- fn_meta_experimental(moderator = mod, cor_exp = r_exp, cor_con = r_con, data = data_c) %>%
+  result <- fn_meta_experimental(moderator = mod, cor_exp = r_exp, 
+                                 cor_con = r_con, data_c = data_c) %>%
     tidy()
   result$moderator <- mod
   results_moderation <- bind_rows(results_moderation, result)
@@ -1125,7 +1126,7 @@ descriptive_data <- data_c %>%
   mutate(n_exp_con = paste0(n_exp, "/", n_con), .keep = "unused") %>%
   left_join(., number_of_effects, by = c("moderator", "term"))
   
-experimental_final <- results_df %>%
+experimental_final <- results_moderation %>%
   mutate(term = str_remove(term, "^[^)]*\\)")) %>%
   mutate(sig = case_when(
     p.value < .001 ~ "***",
@@ -1136,11 +1137,12 @@ experimental_final <- results_df %>%
   mutate(across(where(is.numeric), ~ round(.x, 3))) %>%
   mutate(across(where(is.numeric), ~ format(.x, nsmall = 3)))%>%
   mutate(p.value = ifelse(p.value < .001, "< .001", as.character(p.value))) %>%
-  mutate(p.value = gsub("^0\\.", ".", p.value)) %>%
+  mutate(p.value = gsub("^0\\.", ".", p.value),
+         term = as.numeric(term)) %>%
   left_join(., descriptive_data, by = c("moderator", "term")) %>%
   select(moderator, term, sig, k, n_exp_con, estimate, std.error, statistic, p.value) %>%
   mutate(moderator = if_else(duplicated(moderator), NA_character_, moderator)) %>%
-  left_join(., qtest_results_df, by = "moderator") %>%
+  left_join(., qtest_results_moderation, by = "moderator") %>%
   select(-q_test.moderator)
 
 export(experimental_final, "results_exp.xlsx")
@@ -1172,7 +1174,7 @@ generate_contrast_matrix <- function(p) {
 results_posthoc <- data.frame()
 
 for (mod in moderators) {
-  result <- fn_meta_experimental(moderator = mod, cor_exp = r_exp, cor_con = r_con, data = df)
+  result <- fn_meta_experimental(moderator = mod, cor_exp = r_exp, cor_con = r_con, data_c = data_c)
   result_posthoc <- result %>% tidy()
   result_posthoc$moderator <- mod
   contrast_matrix <- generate_contrast_matrix(result$p)
