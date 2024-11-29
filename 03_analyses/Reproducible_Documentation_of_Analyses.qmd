@@ -498,11 +498,11 @@ data_pp_es <- escalc(
     data = data_pp_es
   )
 
-V <- vcalc(vi = vi, cluster = author, subgroup = group, data = data_pp_es)
+# V <- vcalc(vi = vi, cluster = author, subgroup = group, data = data_pp_es)
 
 REM <- rma.mv(
     yi = yi, 
-    V = V, 
+    V = Vi, 
     data = data_pp_es,
     mods = as.formula(paste("~ factor(", moderator, ") - 1")),
     random = ~ 1 | author,
@@ -854,7 +854,7 @@ data_c <- data_c %>%
 # compute mean, min and max of ES and CI from each study
 sensitivity %>%
   dplyr::select(-c(beta, pvalue, se, sigma2)) %>%
-  pivot_longer(c(3:30),                       # reshape data data from
+  pivot_longer(c(3:32),                       # reshape data data from
                names_to = "variable",         # sensitivity analysis
                values_to = "values") %>%
   mutate(id = as.numeric(str_sub(variable, -2, -1)),
@@ -1028,11 +1028,11 @@ dat <- data_c %>%
   mutate(yi = dat_es_exp$yi - dat_es_con$yi,
          vi = dat_es_exp$vi + dat_es_con$vi)
 
-V <- vcalc(vi = vi, cluster = author, subgroup = group, data = dat)
+# V <- vcalc(vi = vi, cluster = author, subgroup = group, data = dat)
 
 REM <- rma.mv(
     yi = yi, 
-    V = V, 
+    V = vi,
     data = dat,
     mods = as.formula(paste("~ factor(", moderator, ") - 1")),
     random = ~ 1 | author,
